@@ -1,0 +1,33 @@
+name: Shipyard
+type: theme
+base theme: classy
+description: 'A base theme with sensible default CSS classes added. Learn how to use shipyard as a base theme in the <a href="https://www.drupal.org/docs/8/theming">Drupal 8 Theming Guide</a>.'
+package: Custom
+version: VERSION
+core: 8.x
+force_export: false
+inherit_layout: false
+scss_support: true
+
+libraries:
+  - shipyard/base
+  - shipyard/global
+  - shipyard/messages
+  - shipyard/fonts
+  - shipyard/fullcalendar
+  - shipyard/basictable
+  - shipyard/colorbox
+  # - shipyard/jquery-cookie
+  - core/normalize
+
+libraries-extend:
+  user/drupal.user:
+    - shipyard/user
+  core/drupal.dropbutton:
+    - shipyard/dropbutton
+  core/drupal.dialog:
+    - shipyard/dialog
+  file/drupal.file:
+    - shipyard/file
+  core/drupal.progress:
+    - shipyard/progress

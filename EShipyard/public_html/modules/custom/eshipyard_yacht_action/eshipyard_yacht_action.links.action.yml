@@ -1,0 +1,5 @@
+yacht_action.add_form:
+  route_name: entity.yacht_action.add_form
+  title: 'Add yacht action'
+  appears_on:
+    - entity.yacht_action.collection

@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @file
+ * Provides a custom functionality for sending emails.
+ */
+
+/**
+ * Implements hook_mail().
+ */
+function eshipyard_email_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'email_invitation':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = 'E-Shipyard Invitation';
+      $message['body'][] = $params['message'];
+      break;
+    case 'email_notification_approved':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = 'E-Shipyard Notification';
+      $message['body'][] = $params['message'];
+      break;
+    case 'email_notification_message':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = 'E-Shipyard Newsletter';
+      $message['body'][] = $params['message'];
+      break;
+  }
+}

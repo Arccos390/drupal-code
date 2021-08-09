@@ -1,0 +1,7 @@
+entity.yacht_action.settings:
+  path: 'admin/structure/yacht-action'
+  defaults:
+    _form: '\Drupal\eshipyard_yacht_action\Form\YachtActionSettingsForm'
+    _title: 'Yacht action'
+  requirements:
+    _permission: 'administer yacht action'

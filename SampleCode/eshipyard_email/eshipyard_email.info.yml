@@ -1,0 +1,7 @@
+name: E-Shipyard - Email
+type: module
+description: 'Provides custom functionality for sending email.'
+package: E-Shipyard
+core: 8.x
+dependencies:
+  - drupal:views_bulk_operations

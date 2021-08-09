@@ -1,0 +1,220 @@
+@import "breakpoint";
+@include breakpoint-set('default feature', 'max-width');
+
+@import "abstractions/_mixins.scss";
+
+@import "variables/_colors.scss";
+//@import "variables/_grid.scss";
+@import "variables/_typography.scss";
+@import "variables/_sprites.scss";
+@import "base/_reset.scss";
+@import "components/_header.scss";
+@import "components/_sidebar_menu.scss";
+@import "components/_content.scss";
+@import "components/_yacht-card.scss";
+@import "components/_yacht-infotabs.scss";
+@import "components/_yacht-requests.scss";
+@import "components/_buttons.scss";
+@import "components/_sidebar-right.scss";
+@import "components/_grid.scss";
+@import "components/_user-card.scss";
+@import "components/_data_lists.scss";
+@import "components/_admin-calendar.scss";
+@import "components/_pending-requests.scss";
+@import "abstractions/_flags.scss";
+@import "components/_resp_menu.scss";
+@import "components/_yacht-calendar.scss";
+@import "components/_popup.scss";
+
+body {
+	background: $white;
+}
+
+.layout-container {
+	height: 100vh;
+}
+
+
+.path-user {
+	#general-container {
+		display: block !important;
+	}
+
+  main {
+    float: none;
+    padding: 0 30px;
+    width: 100%;
+  }
+
+  .user-pass-reset {
+    padding-top: 40px;
+  }
+
+  
+
+  .user-login-form,
+  .user-pass,
+  .user-pass-reset {
+    text-align: center;
+    max-width: 450px;
+    margin: 0 auto;
+
+    label {
+      display: block;
+      padding-bottom: 5px;
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid $grey;
+      padding: 10px 20px;
+      background: $white;
+    }
+
+    input[type="submit"] {
+      background: $orange;
+      padding: 8px 60px;
+      border-radius: 30px;
+      color: $white;
+      border: none;
+      width: auto;
+
+      &:hover {
+        box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      }
+    }
+
+    .form-actions {
+      margin-top: 30px;
+    }
+
+    .form-item,
+    .form-actions {
+      margin: 40px 0 0; 
+    }
+
+    .description,
+    p {
+      color: $dark-grey;
+      font-size: $s-base;
+    }
+
+    .request-password-link {
+      border-top: 1px solid $grey;
+      padding-top: 10px;
+      margin-top: 50px;
+
+      a {
+        float: right;
+        color: $petrol;
+        font-size: $s-base;
+      }
+    }
+
+    .reset-text {
+      color: $dark-grey;
+      font-size: $s-base;
+      float: left;
+    }
+  }
+  .user-login-form {
+    margin-top: 250px;
+  }
+}
+
+
+.inactive {
+	// background: $light-grey;
+	// //color: $black;
+	// //display: none;
+ //  color: #737373;  
+ //  border: 1px solid rgba(0,0,0,.05);
+
+	// &:hover {
+	// 	box-shadow: none;
+	// 	cursor: default;
+	// }
+}
+
+.missing {
+  border: 1px solid #ff1313 !important;
+  position: relative;
+  color: #ff1313;
+}
+
+
+.role-bsg_operator {
+	&.path-owners {
+		#edit-user {
+			text-indent: -99999px;
+		}
+	}
+}
+
+.role-external_user {
+	#edit-user,
+	.edit {
+		text-indent: -99999px;
+	}
+}
+
+
+.file {
+  @include links($petrol,$petrol,$petrol,$petrol);
+}
+
+
+.yacht-gallery {
+  img {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+
+
+.has-paid,
+.has-not-paid {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.has-paid {
+  background: green;
+}
+
+.has-not-paid {
+  background: red;
+}
+
+.admin-paid {
+  margin-right: 10px;
+}
+
+.remain-ashore {
+  padding: 30px;
+  //display: none;
+  .active {
+    background: $orange;
+    color: $white;
+  }
+}
+
+#block-views-block-yacht-block-2 {
+  margin-top: 50px;
+  h4 {
+    display: block;
+    font-family: "Alegreya";
+    font-size: 26px;
+    max-width: 260px;
+    border-bottom: 2px solid #148c8c;
+    margin-bottom: 20px;
+  }
+
+  .views-field-title {
+    @include links($black,$black,$orange,$black);
+  }
+}

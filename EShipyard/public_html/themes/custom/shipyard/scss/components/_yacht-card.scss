@@ -1,0 +1,230 @@
+
+
+
+#bsg-yacht {
+	
+}
+
+.yacht-card {
+	
+	&-container {
+		padding: 0 25px;
+		//max-width: 450px;
+		//width: 100%;
+		width: percentage(450 / 1230);
+		min-height: 600px;
+		
+		background: $white;
+		box-shadow: 0 2px 4px rgba($black,0.15%);
+		position: relative;
+		display: inline-block;
+		vertical-align: top;
+
+		// General Styling Across Card
+
+		// These classes are generally used across the card
+		// to simulate a floating event between the two sides.
+		.left { text-align: left; }
+		.right { text-align: right;	}
+
+		h3 {
+			text-align: center;
+			line-height: 24px;
+		}
+
+		@include breakpoint(1140px) {
+			max-width: 400px;
+			width: 100%;
+			display: block;
+			margin: 0 auto;
+			margin-bottom: 40px;
+		}
+		@include breakpoint(570px) {
+			margin-top: 80px;
+		}
+		@include breakpoint(380px) {
+			padding: 0 15px;
+			min-height: 550px;
+		}
+	}
+
+	// Specific Styling by Card Sub Element
+	&-header {
+		height: 200px;
+		margin: 0 -25px;
+		background: linear-gradient(to right, $blue 20%, $grad-blue 80%);
+		position: relative;	
+
+
+		.flag {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			right: 20px;
+		}
+
+		@include breakpoint(380px) {
+			margin: 0 -15px;
+		}
+	}
+
+	&.name-wrapper {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		color: $white;
+		font-family: $alegreya;
+		font-size: $xxsm-medium;
+	}
+
+	&-main-info {
+		position: relative;
+		margin-top: -30px;
+		margin-bottom: 45px;
+		width: 100%;
+		@include clearfix;			
+
+		.info-col {
+			text-align: center;
+			width: calc(100% / 3);
+			float: left;
+
+			.info-title {
+				color: $petrol;
+				margin-bottom: 10px;
+			}
+		}
+		
+		.info-col-wrapper {
+			width: 60px;
+			text-align: center;
+		}			
+		
+		.right {
+			.info-col-wrapper {
+				width: 60px;
+				text-align: center;
+				float: right;
+			}	
+		}	
+
+		@include breakpoint(380px) {
+			margin-bottom: 30px;
+		}
+	}
+	
+	&.type {
+		text-align: center;
+	}
+
+	&-secondary-info {
+		font-size: 0;
+		padding-bottom: 30px;
+		border-bottom: 1px solid $grey;
+		@include clearfix;
+		.info-text {
+			color: $petrol;
+			display: inline-block;
+			font-size: $base;
+			//width: 50%;
+		}
+		.right {
+			float: right;
+			@include breakpoint(380px){
+				text-align: left;
+				display: block;
+				float: none;
+			}
+		}
+		.left {
+			float: left;
+			@include breakpoint(380px){
+				text-align: left;
+				display: block;
+				float: none;
+			}
+		}
+	}
+
+
+	&-footer {
+		font-size: 0;
+		padding-top: 30px;
+
+		.file {
+			display: inline-block;
+			width: 50%;
+			font-size: $base;
+
+			&:before {
+				content: "";
+				display: inline-block;
+				vertical-align: middle;
+				background: url(../images/custom-icons/file.svg);
+				background-size: contain;
+				width: 24px;
+				height: 30px;
+				background-repeat: no-repeat;
+				margin-right: 5px;
+			}
+
+			@include breakpoint(380px) {
+				display: block;
+				text-align: left;
+				width: 100%;
+			}
+		}
+	}
+
+}
+
+
+
+// Loop through each given id that is designed to hold an icon
+// and assign the corresponding svg image to it.
+$map: (
+  '#loa': 'loa.svg',
+  '#weight': 'weight.svg',
+  '#draft': 'loa.svg',
+  '#mb': 'mb.svg',
+  '#sy': 'sy.svg',
+  '#cm': 'cm.svg'
+);
+
+@each $element, $icon in $map {
+  #{$element} {
+  	&:before {
+  		content: "";
+  		display: inline-block;
+  		background: url(../images/custom-icons/#{$icon});
+	    height: 60px;
+	    width: 60px;
+	    background-size: contain;
+	    background-repeat: no-repeat;	 
+	    background-position: center;		
+	    box-shadow: 0 2px 4px rgba($black,0.15);
+	    border-radius: 50%;
+
+	    @include breakpoint(380px) {
+	    	width: 50px;
+	    	height: 50px;
+	    }
+  	} 	
+  }
+  @if $element == '#draft' {
+  	#{$element} {
+		&:before {
+			transform: rotate(90deg);
+		}
+	}
+  }
+  @else if $element == '#mb' or $element == '#sy' or $element == '#cm' {
+   	#{$element} {
+		&:before {
+			box-shadow: none;
+		}
+	}	
+  }
+}
+

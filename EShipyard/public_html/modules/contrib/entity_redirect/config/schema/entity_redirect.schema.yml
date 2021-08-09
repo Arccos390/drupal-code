@@ -1,0 +1,65 @@
+node.type.*.third_party.entity_redirect:
+  type: mapping
+  label: 'Entity Redirect per entity settings'
+  mapping:
+    destination:
+      type: string
+      label: 'The destination that the user will be redirected to after saving an entity.'
+    personalizable:
+      type: boolean
+      label: 'Whether to enable users to personalize this setting (via their user page).'
+    redirect_edit:
+      type: boolean
+      label: 'Whether to redirect after editing as well as creating new entities.'
+    url:
+      type: string
+      label: 'A local url to redirect to.'
+    external:
+      type: string
+      label: 'An external path to redirect the form to.'
+    personalization:
+      type: sequence
+      label: 'User specific personalization of the destination'
+      sequence:
+        type: mapping
+        mapping:
+          destination:
+            type: string
+            label: 'The destination that the user will be redirected to after saving an entity.'
+          url:
+            type: string
+            label: 'A local url to redirect to.'
+          external:
+            type: string
+media_entity.bundle.*.third_party.entity_redirect:
+  type: mapping
+  label: 'Entity Redirect per entity settings'
+  mapping:
+    destination:
+      type: string
+      label: 'The destination that the user will be redirected to after saving an entity.'
+    personalizable:
+      type: boolean
+      label: 'Whether to enable users to personalize this setting (via their user page).'
+    redirect_edit:
+      type: boolean
+      label: 'Whether to redirect after editing as well as creating new entities.'
+    url:
+      type: string
+      label: 'A local url to redirect to.'
+    external:
+      type: string
+    personalization:
+      type: sequence
+      label: 'User specific personalization of the destination'
+      sequence:
+        type: mapping
+        mapping:
+          destination:
+            type: string
+            label: 'The destination that the user will be redirected to after saving an entity.'
+          url:
+            type: string
+            label: 'A local url to redirect to.'
+          external:
+            type: string

@@ -1,0 +1,466 @@
+#bsg-datalist {
+	main {
+		width: 100%;
+		overflow-x: hidden;
+		padding-right: 0;
+		padding-top: 70px;
+		@include breakpoint(1600px) {
+			padding-right: 45px;
+		}
+		@include breakpoint(960px) {
+			padding-right: 15px;
+		}
+	}
+
+
+	iframe {
+	    border: none;
+	    width: 100%;
+	    max-width: 1300px;
+	    margin-top: 30px;
+	    height: 700px;
+	}	
+
+	h2 {
+		display: block;
+		font-family: $alegreya;
+		font-size: $sl-medium;
+		max-width: 120px;
+		border-bottom: 2px solid $petrol-light;
+		margin-bottom: 10px;
+	}
+
+	.datalist {
+		&-container {
+			float: left;
+			width: calc(100% - 470px);
+			@include breakpoint(1600px) {
+				width: calc(100% - 350px);
+				width: 100%;
+			}
+		}
+		&-content {
+			
+			overflow-x: hidden;
+			box-shadow: 0 2px 4px rgba($black,0.15);
+
+			.xs {
+				width: 6%;
+			}
+			.sm {
+				width: 8%;
+			}
+			.lg {
+				width: 14%;
+			}
+
+			// .xs,.sm,.lg, td{
+			// 	@include breakpoint(730px) {
+			// 		width: auto;
+			// 		padding: 0;
+			// 		text-align: left;
+					
+			// 		&:before {
+			// 			padding: 8px 20px;
+			// 		    border-top: 1px solid rgba(255,255,255,0.1);
+			// 		}
+
+			// 		.bt-content, a {
+			// 			background: $white;
+			// 			padding: 8px 20px;
+			// 			width: 100%;
+			// 			color: $black;
+			// 		}
+			// 	}
+			// }
+
+			.edit {
+				@include links(#00a99d,#00a99d,#00a99d,#00a99d);
+			}
+			
+			.sy {
+				@include sprite($sprite-sy);
+				display: inline-block;
+			}
+			.mb {
+				@include sprite($sprite-mb);
+				display: inline-block;
+			}
+			.cm {
+				@include sprite($sprite-cm);
+				display: inline-block;
+			}
+			.flag {
+				display: inline-block;
+				text-indent: -9999999px;
+			}
+			
+
+			table {
+				width: 100%;
+				@include links($black,$black,$black,$black);		
+				background: linear-gradient(to right, $blue 20%, $grad-blue 80%);	
+			}
+
+			thead {
+				
+				color: $white;
+				tr {
+					background: none;
+				}
+			}
+
+			tr td,
+			th {
+				text-align: center;
+				//width: 12.5%;
+				width: percentage(136 / 1224);
+				padding: 20px 10px;
+				// @include breakpoint(730px) {
+				// 	width: auto;
+				// 	padding: 0;
+				// 	text-align: left;
+				// }
+			}
+
+			td {
+				padding: 10px;
+
+			}
+
+			th {
+				font-family: $alegreya;
+				font-size: $medium;
+			}
+
+			tr {
+				background: $white;
+				&:nth-child(2n) {
+					background: $opaque-no-trans;
+				}
+
+				// @include breakpoint(730px) {
+				// 	background: linear-gradient(to bottom, $blue 20%, $grad-blue 80%);
+				// 	color: $white;
+
+				// 	&:nth-child(2n){
+				// 		background: linear-gradient(to bottom, $blue 20%, $grad-blue 80%);
+				// 		border-top: 1px solid $light-grey;
+				// 		border-bottom: 1px solid $light-grey;
+				// 	}
+				// }
+			}
+		}
+		&-pager {
+			color: $opaque-petrol;
+			font-size: 15px;
+			text-align: right;
+			margin-bottom: 10px;
+			span {
+				margin: 0 5px;
+			}
+			.active {
+				cursor: pointer;
+				color: $petrol-light;
+			}
+		}
+
+		&-calendar {
+			float: left;
+			width: calc(100% - 470px);
+			overflow-x: hidden;
+			box-shadow: 0 2px 4px rgba($black,0.15);
+		}
+
+		&-right-sidebar {
+			padding-top: 0;
+			margin-left: 50px;
+			
+			.content-wrapper {
+				padding: 20px;
+				background: $light-grey;
+				margin-bottom: 60px;
+				box-shadow: 0 2px 4px rgba($black,0.15);
+				position: relative;
+		
+				@include breakpoint(360px) {
+					padding: 10px;
+				}
+
+			}
+
+			h3 {
+				text-align: center;
+				display: block;
+				font-family: $alegreya;
+				padding-bottom: 5px;
+				margin-bottom: 30px;
+
+				&:after {
+					content: "";
+					display: block;
+					margin: 0 auto;
+					width: 50px;
+					height: 2px;
+					background: $petrol;
+					position: relative;
+				}
+			}	
+
+			.filter {
+				.form-control {
+					width: 100%;
+					border: 1px solid $grey-2;
+					border-radius: 3px;
+					transition: ease-in;
+					padding: 10px;
+
+					&:focus {
+						box-shadow: 0 2px 2px -1px rgba($black,0.15);
+						border: 1px solid #c5c5c5;
+					}
+				}
+			}
+
+			.filter,
+			.checkbox-container {
+				&>label {
+					margin: 30px 0 15px 0;
+					font-weight: 600;
+					color: $petrol;
+					@include breakpoint(960px) {
+						font-size: $s-base;
+					}
+				}
+			}
+	
+
+			label {
+				display: block;
+				@include breakpoint(960px) {
+					font-size: $s-base;
+				}
+				
+			}
+
+			.checkbox-container {
+				display: block;
+				border-bottom: 1px solid $grey;
+				padding-bottom: 30px;
+			}
+
+			.checkbox-wrapper {
+				display: inline-block;
+				
+
+				&.sm-col {
+					width: 25%;
+				}
+				&.md-col {
+					width: 30%;
+				}
+				
+				input[type="checkbox"] {
+					display: inline-block;
+					vertical-align: middle;
+					height: 20px;
+					position: relative;
+    				left: -999em; /* hide the real checkbox */
+				}
+
+				.checkbox-target {
+				    display: inline-block;
+				    vertical-align: middle;
+				    float: left;
+				}
+
+				input[type='checkbox'] + span.checkbox-target:after {
+				    content: ""; 
+				    border: 1px solid $grey-2;
+				    background: $white;
+				    width: 20px;
+				    height: 20px;
+				    display: inline-block;
+				    vertical-align: text-bottom;
+				    border-radius: 4px;
+				}
+				input[type='checkbox']:checked + span.checkbox-target:after {
+				    content: "";
+				    @include sprite($sprite-tick-lg);
+				    color: $white;
+				    background-color: $petrol-light; 
+				    line-height: 19px;
+				    width: 20px;
+				    height: 20px;
+				    text-align: center;
+				    border: 1px solid $petrol-light;
+				    border-radius: 4px;
+				}
+				
+				.filter-label {
+				    float: left;
+    				margin-left: 5px;
+				}
+
+				label {
+					display: inline-block;
+					vertical-align: middle;
+					margin-right: 5px;
+					min-width: 20px;
+					font-size: $base;
+					@include breakpoint(960px) {
+						font-size: $s-base;
+					}
+					//padding-left: 6px;
+				}
+			}
+
+			.reset-filters {
+				color: $petrol;
+				display: block;
+				margin-top: 40px;
+				font-family: $ubuntu;
+				font-size: $base;
+				font-weight: 400;
+				&:before {
+					content: "X";
+					display: inline-block;
+					position: relative;
+					margin-right: 5px;
+				}
+				&:hover {
+					cursor: pointer;
+				}
+			}
+
+			//right-sidebar responsive 
+			@include breakpoint(1600px) {
+				margin-left: 0;
+			    //margin-left: 0;
+			    // position: fixed;
+			    // right: 0;
+			    // height: 100vh;
+
+			}
+
+		}	
+	}
+	
+}
+
+
+
+
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s
+}
+
+.fade-enter,
+.fade-leave-to
+/* .fade-leave-active in <2.1.8 */
+
+{
+  opacity: 0
+}
+
+
+
+
+// Responsive Tables 
+
+// table {
+//     border: 1px solid #ccc;
+//     width: 100%;
+//     margin:0;
+//     padding:0;
+//     border-collapse: collapse;
+//     border-spacing: 0;
+//   }
+
+//   table tr {
+//     border: 1px solid #ddd;
+//     padding: 5px;
+// 		background: #fff;
+
+//   }
+
+//   table th, table td {
+//     padding: 10px;
+//     text-align: center;
+
+//   }
+
+//   table th {
+//     text-transform: uppercase;
+//     letter-spacing: 1px;
+//   }
+  
+  
+@media screen and (max-width: 730px) {
+	#bsg-datalist .datalist-content {
+		table.card {
+			border: 0;
+
+			.xs,.sm,.lg, td{
+
+				width: auto;
+				padding: 0;
+				text-align: left;
+				
+				.bt-content, a {
+					background: $white;
+					padding: 20px;
+					width: 100%;
+					color: $black;
+				    width: calc(100% - 140px);
+    				float: left;
+    				border: 1px solid $white;
+    				text-align: left;
+    				line-height: 20px;
+				}
+			}
+		}
+
+		table.card thead {
+			display: none;
+		}
+
+		table.card tr {
+			
+			display: block;
+			border-bottom: 1px solid $light-grey;
+			background: linear-gradient(to right, $blue 20%, $grad-blue 80%);
+			color: $white;
+		}
+
+		table.card td {
+			display: block;
+			text-align: right;
+			font-size: 13px;
+			@include clearfix;
+		}
+
+		table.card td:last-child {
+			border-bottom: 0;
+		}
+
+		table.card td::before {
+			content: attr(data-label);
+			width: 100px;
+			padding: 20px;
+			border-top: 1px solid rgba(255,255,255,0.1);
+			float: left;
+			text-transform: uppercase;
+			font-weight: bold;
+			text-align: left;
+
+		}
+		.card tbody{
+			line-height:0!important;
+		}
+
+	}
+
+}

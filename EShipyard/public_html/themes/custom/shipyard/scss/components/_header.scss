@@ -1,0 +1,134 @@
+
+// Header 
+
+// This easy fix sets the side menu's height automatically depending on 
+// whether the admin navbars are open or not. Not that each admin bar has
+// different states and we must take each of these into account.
+header {
+	top: 79px;
+	padding: 5px 15px 8px;
+
+	@include breakpoint(960px) {
+		padding: 5px 0 8px;
+	}
+}
+
+.toolbar-tray-open {
+	header {
+		top: 79px;
+	}
+}
+
+.toolbar-fixed {
+	header {
+		top: 39px;	
+	}
+	
+	&.toolbar-tray-open {
+		header {
+			top: 79px;	
+		}		
+	}
+}
+
+
+.toolbar-vertical {
+	@include breakpoint(610px) {
+		header {
+			top: 39px;	
+		}		
+	}
+}
+
+header {
+	background: $petrol;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+	position: fixed;
+	z-index: 99;
+	top: 0;
+	width: 100%;
+	@include clearfix;
+	
+}
+
+.site-logo {
+	float: left;
+    //width: 150px;
+    @include breakpoint(600px) {
+    	margin-top: 6px;
+    	img {
+    		max-width: 125px;
+    	}
+    }
+
+    @include breakpoint(360px) {
+    	margin-top: 10px;
+    	img {
+    		max-width: 100px;
+    	}
+    }
+
+    // @include breakpoint(380px) {
+    // 	margin-top: 0;
+    // 	img {
+    // 		max-width: 80%;
+    // 		height: 45px;
+    // 	}
+    // }
+}
+
+.nav-right {
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	.menu-item {
+		display: inline-block;
+		margin-right: 15px;
+		font-size: $s-base;
+		font-weight: $bold;
+		@include links($petrol-light,$petrol-light,$white,$petrol-light);
+		@include breakpoint(400px) {
+			margin-right: 5px;
+		}
+
+		a {
+			&:after {
+				content: "";
+				display: inline-block;
+				vertical-align: middle;
+				width: 28px;
+				height: 28px;
+				background-repeat: no-repeat;
+				background-size: contain;
+				margin-left: 10px;
+
+				@include breakpoint(450px) {
+				// 	margin-left: 5px;
+				// 	width: 18px;
+				// 	height: 18px;
+					display: none;
+				}
+
+			}
+		}
+	}
+
+}
+
+
+a[data-drupal-link-system-path="user"] {
+	&:after{ 
+		background: url(../images/custom-icons/user.svg);
+	 }			
+}
+a[data-drupal-link-system-path="user/logout"] {
+	&:after {
+		background: url(../images/custom-icons/logout.svg);
+	}
+}
+a[data-drupal-link-system-path="user/login"] {
+	&:after {
+		background: url(../images/custom-icons/login.svg);
+	}
+}

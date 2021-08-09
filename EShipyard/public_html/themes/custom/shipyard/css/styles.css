@@ -1,0 +1,3808 @@
+/* links mixin set the display rules of all a tags in a block */
+/*General Rules*/
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0; }
+
+img {
+  height: auto;
+  max-width: 100%;
+  display: block; }
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+
+html {
+  font-size: 16px;
+  line-height: 1.55;
+  font-family: "Ubuntu";
+  font-weight: 400;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+body {
+  line-height: inherit;
+  position: relative; }
+
+a {
+  text-decoration: none;
+  cursor: pointer; }
+
+strong {
+  font-weight: 700; }
+
+em {
+  font-style: italic; }
+
+p {
+  margin-bottom: 16px;
+  margin-bottom: 1rem; }
+  p:last-child {
+    margin-bottom: 0; }
+
+:focus {
+  outline: 0; }
+
+h3 {
+  font-size: 24px;
+  font-size: 1.5rem; }
+
+h4 {
+  font-size: 20px;
+  font-size: 1.25rem; }
+
+.hidden {
+  display: none; }
+
+header {
+  top: 79px;
+  padding: 5px 15px 8px; }
+  @media (max-width: 960px) {
+    header {
+      padding: 5px 0 8px; } }
+
+.toolbar-tray-open header {
+  top: 79px; }
+
+.toolbar-fixed header {
+  top: 39px; }
+
+.toolbar-fixed.toolbar-tray-open header {
+  top: 79px; }
+
+@media (max-width: 610px) {
+  .toolbar-vertical header {
+    top: 39px; } }
+
+header {
+  background: #0d5959;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  width: 100%; }
+  header:after {
+    content: "";
+    display: block;
+    clear: both; }
+
+.site-logo {
+  float: left; }
+  @media (max-width: 600px) {
+    .site-logo {
+      margin-top: 6px; }
+      .site-logo img {
+        max-width: 125px; } }
+  @media (max-width: 360px) {
+    .site-logo {
+      margin-top: 10px; }
+      .site-logo img {
+        max-width: 100px; } }
+
+.nav-right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%); }
+  .nav-right .menu-item {
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 14px;
+    font-size: 0.875rem;
+    font-weight: 600; }
+    .nav-right .menu-item a {
+      -webkit-transition: 0.5s;
+      transition: 0.5s;
+      color: #148c8c; }
+      .nav-right .menu-item a:visited {
+        color: #148c8c; }
+      .nav-right .menu-item a:hover {
+        color: #fff;
+        cursor: pointer; }
+      .nav-right .menu-item a:active {
+        color: #148c8c; }
+    @media (max-width: 400px) {
+      .nav-right .menu-item {
+        margin-right: 5px; } }
+    .nav-right .menu-item a:after {
+      content: "";
+      display: inline-block;
+      vertical-align: middle;
+      width: 28px;
+      height: 28px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      margin-left: 10px; }
+      @media (max-width: 450px) {
+        .nav-right .menu-item a:after {
+          display: none; } }
+
+a[data-drupal-link-system-path="user"]:after {
+  background: url(../images/custom-icons/user.svg); }
+
+a[data-drupal-link-system-path="user/logout"]:after {
+  background: url(../images/custom-icons/logout.svg); }
+
+a[data-drupal-link-system-path="user/login"]:after {
+  background: url(../images/custom-icons/login.svg); }
+
+.sidebar-menu {
+  height: calc(100vh - 45px); }
+
+.toolbar-tray-open .sidebar-menu {
+  height: calc(100vh - 145px); }
+
+.toolbar-fixed .sidebar-menu {
+  height: calc(100vh - 84px); }
+
+.toolbar-fixed.toolbar-tray-open .sidebar-menu {
+  height: calc(100vh - 145px); }
+
+@media (max-width: 960px) {
+  .toolbar-oriented .toolbar-bar {
+    position: fixed; } }
+
+.sidebar-menu {
+  position: fixed;
+  background: rgba(13, 89, 89, 0.1);
+  width: 165px;
+  padding: 50px 20px 35px 20px;
+  bottom: 0; }
+  @media (max-width: 960px) {
+    .sidebar-menu {
+      z-index: 1; } }
+  .sidebar-menu .menu {
+    margin: 0; }
+    .sidebar-menu .menu:after {
+      content: "";
+      display: block;
+      clear: both; }
+  .sidebar-menu .menu-item a {
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    color: #000; }
+    .sidebar-menu .menu-item a:visited {
+      color: #000; }
+    .sidebar-menu .menu-item a:hover {
+      color: #000;
+      cursor: pointer; }
+    .sidebar-menu .menu-item a:active {
+      color: #000; }
+  .sidebar-menu .menu-item a {
+    font-weight: 300;
+    font-size: 16px;
+    font-size: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #fff;
+    padding: 7vh 10% 21px 10%;
+    padding: 20px 10px;
+    line-height: 21px;
+    display: block; }
+    @media screen and (max-height: 900px) {
+      .sidebar-menu .menu-item a {
+        padding: 20px 0; }
+        .sidebar-menu .menu-item a:after {
+          content: "";
+          display: block;
+          clear: both; } }
+    @media (max-width: 960px) {
+      .sidebar-menu .menu-item a {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.15); }
+        .sidebar-menu .menu-item a:after {
+          content: "";
+          display: block;
+          clear: both; } }
+  .sidebar-menu .menu-item:nth-child(1) {
+    padding-top: 0; }
+
+.sidebar-menu-wrapper {
+  position: relative;
+  height: 100%; }
+
+.sidebar-menu-inner {
+  height: 100%;
+  position: relative; }
+
+footer {
+  position: absolute;
+  bottom: 0;
+  font-size: 12px;
+  font-size: 0.75rem;
+  text-align: center; }
+
+#m-home:before {
+  content: "";
+  display: inline-block;
+  background: url(../images/custom-icons/home.svg);
+  height: 50px;
+  height: 5vh;
+  background-size: contain;
+  width: 60px;
+  background-repeat: no-repeat;
+  background-position: center; }
+  @media screen and (max-height: 900px) {
+    #m-home:before {
+      height: 25px;
+      width: 35px;
+      float: left;
+      margin-right: 10px; } }
+  @media (max-width: 960px) {
+    #m-home:before {
+      display: inline-block;
+      vertical-align: middle;
+      float: none; } }
+
+@media screen and (max-height: 900px) {
+  #m-home {
+    float: right;
+    width: 100%; } }
+
+#m-cradle:before {
+  content: "";
+  display: inline-block;
+  background: url(../images/custom-icons/cradle.svg);
+  height: 50px;
+  height: 5vh;
+  background-size: contain;
+  width: 60px;
+  background-repeat: no-repeat;
+  background-position: center; }
+  @media screen and (max-height: 900px) {
+    #m-cradle:before {
+      height: 25px;
+      width: 35px;
+      float: left;
+      margin-right: 10px; } }
+  @media (max-width: 960px) {
+    #m-cradle:before {
+      display: inline-block;
+      vertical-align: middle;
+      float: none; } }
+
+@media screen and (max-height: 900px) {
+  #m-cradle {
+    float: right;
+    width: 100%; } }
+
+#m-yachts:before {
+  content: "";
+  display: inline-block;
+  background: url(../images/custom-icons/yacht.svg);
+  height: 50px;
+  height: 5vh;
+  background-size: contain;
+  width: 60px;
+  background-repeat: no-repeat;
+  background-position: center; }
+  @media screen and (max-height: 900px) {
+    #m-yachts:before {
+      height: 25px;
+      width: 35px;
+      float: left;
+      margin-right: 10px; } }
+  @media (max-width: 960px) {
+    #m-yachts:before {
+      display: inline-block;
+      vertical-align: middle;
+      float: none; } }
+
+@media screen and (max-height: 900px) {
+  #m-yachts {
+    float: right;
+    width: 100%; } }
+
+#m-areas:before {
+  content: "";
+  display: inline-block;
+  background: url(../images/custom-icons/area.svg);
+  height: 50px;
+  height: 5vh;
+  background-size: contain;
+  width: 60px;
+  background-repeat: no-repeat;
+  background-position: center; }
+  @media screen and (max-height: 900px) {
+    #m-areas:before {
+      height: 25px;
+      width: 35px;
+      float: left;
+      margin-right: 10px; } }
+  @media (max-width: 960px) {
+    #m-areas:before {
+      display: inline-block;
+      vertical-align: middle;
+      float: none; } }
+
+@media screen and (max-height: 900px) {
+  #m-areas {
+    float: right;
+    width: 100%; } }
+
+#m-owners:before {
+  content: "";
+  display: inline-block;
+  background: url(../images/custom-icons/owner.svg);
+  height: 50px;
+  height: 5vh;
+  background-size: contain;
+  width: 60px;
+  background-repeat: no-repeat;
+  background-position: center; }
+  @media screen and (max-height: 900px) {
+    #m-owners:before {
+      height: 25px;
+      width: 35px;
+      float: left;
+      margin-right: 10px; } }
+  @media (max-width: 960px) {
+    #m-owners:before {
+      display: inline-block;
+      vertical-align: middle;
+      float: none; } }
+
+@media screen and (max-height: 900px) {
+  #m-owners {
+    float: right;
+    width: 100%; } }
+
+.yacht-card-container {
+  padding: 0 25px;
+  width: 36.58537%;
+  min-height: 600px;
+  background: #fff;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  position: relative;
+  display: inline-block;
+  vertical-align: top; }
+  .yacht-card-container .left {
+    text-align: left; }
+  .yacht-card-container .right {
+    text-align: right; }
+  .yacht-card-container h3 {
+    text-align: center;
+    line-height: 24px; }
+  @media (max-width: 1140px) {
+    .yacht-card-container {
+      max-width: 400px;
+      width: 100%;
+      display: block;
+      margin: 0 auto;
+      margin-bottom: 40px; } }
+  @media (max-width: 570px) {
+    .yacht-card-container {
+      margin-top: 80px; } }
+  @media (max-width: 380px) {
+    .yacht-card-container {
+      padding: 0 15px;
+      min-height: 550px; } }
+
+.yacht-card-header {
+  height: 200px;
+  margin: 0 -25px;
+  background: -webkit-gradient(linear, left top, right top, color-stop(20%, #0071bc), color-stop(80%, #00a99d));
+  background: linear-gradient(to right, #0071bc 20%, #00a99d 80%);
+  position: relative; }
+  .yacht-card-header .flag {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    right: 20px; }
+  @media (max-width: 380px) {
+    .yacht-card-header {
+      margin: 0 -15px; } }
+
+.yacht-card.name-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: #fff;
+  font-family: "Alegreya";
+  font-size: 24px;
+  font-size: 1.5rem; }
+
+.yacht-card-main-info {
+  position: relative;
+  margin-top: -30px;
+  margin-bottom: 45px;
+  width: 100%; }
+  .yacht-card-main-info:after {
+    content: "";
+    display: block;
+    clear: both; }
+  .yacht-card-main-info .info-col {
+    text-align: center;
+    width: calc(100% / 3);
+    float: left; }
+    .yacht-card-main-info .info-col .info-title {
+      color: #0d5959;
+      margin-bottom: 10px; }
+  .yacht-card-main-info .info-col-wrapper {
+    width: 60px;
+    text-align: center; }
+  .yacht-card-main-info .right .info-col-wrapper {
+    width: 60px;
+    text-align: center;
+    float: right; }
+  @media (max-width: 380px) {
+    .yacht-card-main-info {
+      margin-bottom: 30px; } }
+
+.yacht-card.type {
+  text-align: center; }
+
+.yacht-card-secondary-info {
+  font-size: 0;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #ddd; }
+  .yacht-card-secondary-info:after {
+    content: "";
+    display: block;
+    clear: both; }
+  .yacht-card-secondary-info .info-text {
+    color: #0d5959;
+    display: inline-block;
+    font-size: 16px;
+    font-size: 1rem; }
+  .yacht-card-secondary-info .right {
+    float: right; }
+    @media (max-width: 380px) {
+      .yacht-card-secondary-info .right {
+        text-align: left;
+        display: block;
+        float: none; } }
+  .yacht-card-secondary-info .left {
+    float: left; }
+    @media (max-width: 380px) {
+      .yacht-card-secondary-info .left {
+        text-align: left;
+        display: block;
+        float: none; } }
+
+.yacht-card-footer {
+  font-size: 0;
+  padding-top: 30px; }
+  .yacht-card-footer .file {
+    display: inline-block;
+    width: 50%;
+    font-size: 16px;
+    font-size: 1rem; }
+    .yacht-card-footer .file:before {
+      content: "";
+      display: inline-block;
+      vertical-align: middle;
+      background: url(../images/custom-icons/file.svg);
+      background-size: contain;
+      width: 24px;
+      height: 30px;
+      background-repeat: no-repeat;
+      margin-right: 5px; }
+    @media (max-width: 380px) {
+      .yacht-card-footer .file {
+        display: block;
+        text-align: left;
+        width: 100%; } }
+
+#loa:before {
+  content: "";
+  display: inline-block;
+  background: url(../images/custom-icons/loa.svg);
+  height: 60px;
+  width: 60px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 50%; }
+  @media (max-width: 380px) {
+    #loa:before {
+      width: 50px;
+      height: 50px; } }
+
+#weight:before {
+  content: "";
+  display: inline-block;
+  background: url(../images/custom-icons/weight.svg);
+  height: 60px;
+  width: 60px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 50%; }
+  @media (max-width: 380px) {
+    #weight:before {
+      width: 50px;
+      height: 50px; } }
+
+#draft:before {
+  content: "";
+  display: inline-block;
+  background: url(../images/custom-icons/loa.svg);
+  height: 60px;
+  width: 60px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 50%; }
+  @media (max-width: 380px) {
+    #draft:before {
+      width: 50px;
+      height: 50px; } }
+
+#draft:before {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg); }
+
+#mb:before {
+  content: "";
+  display: inline-block;
+  background: url(../images/custom-icons/mb.svg);
+  height: 60px;
+  width: 60px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 50%; }
+  @media (max-width: 380px) {
+    #mb:before {
+      width: 50px;
+      height: 50px; } }
+
+#mb:before {
+  -webkit-box-shadow: none;
+          box-shadow: none; }
+
+#sy:before {
+  content: "";
+  display: inline-block;
+  background: url(../images/custom-icons/sy.svg);
+  height: 60px;
+  width: 60px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 50%; }
+  @media (max-width: 380px) {
+    #sy:before {
+      width: 50px;
+      height: 50px; } }
+
+#sy:before {
+  -webkit-box-shadow: none;
+          box-shadow: none; }
+
+#cm:before {
+  content: "";
+  display: inline-block;
+  background: url(../images/custom-icons/cm.svg);
+  height: 60px;
+  width: 60px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 50%; }
+  @media (max-width: 380px) {
+    #cm:before {
+      width: 50px;
+      height: 50px; } }
+
+#cm:before {
+  -webkit-box-shadow: none;
+          box-shadow: none; }
+
+.user-action-yacht {
+  display: inline-block;
+  margin-right: 10px;
+  background: white;
+  border: 1px solid #e87915;
+  padding: 8px 50px;
+  border-radius: 30px;
+  color: #e87915;
+  min-width: 100px;
+  text-align: center;
+  padding: 4px 30px;
+  margin: 27px 5px;
+  margin-bottom: 0; }
+  .user-action-yacht:hover {
+    background: #e87915;
+    border: none;
+    color: white; }
+
+.bsg-yacht-infotabs .info-content {
+  min-height: 200px;
+  background: rgba(13, 89, 89, 0.1);
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+  padding: 25px;
+  overflow-y: auto; }
+
+.bsg-yacht-infotabs .yacht-tab-file {
+  display: block;
+  margin: 0 -25px;
+  padding: 10px 30px; }
+  .bsg-yacht-infotabs .yacht-tab-file a {
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    color: #000; }
+    .bsg-yacht-infotabs .yacht-tab-file a:visited {
+      color: #000; }
+    .bsg-yacht-infotabs .yacht-tab-file a:hover {
+      color: #000;
+      cursor: pointer; }
+    .bsg-yacht-infotabs .yacht-tab-file a:active {
+      color: #000; }
+  .bsg-yacht-infotabs .yacht-tab-file.file-even {
+    background: rgba(13, 89, 89, 0.1); }
+    .bsg-yacht-infotabs .yacht-tab-file.file-even.first {
+      margin-top: -25px; }
+    .bsg-yacht-infotabs .yacht-tab-file.file-even.last {
+      margin-bottom: -25px; }
+  .bsg-yacht-infotabs .yacht-tab-file.file-odd {
+    background: #fff; }
+    .bsg-yacht-infotabs .yacht-tab-file.file-odd.last {
+      margin-bottom: -25px; }
+
+.bsg-yacht-infotabs .yacht-tab-image {
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 15px; }
+  .bsg-yacht-infotabs .yacht-tab-image img {
+    border-radius: 5px; }
+  @media (max-width: 450px) {
+    .bsg-yacht-infotabs .yacht-tab-image {
+      width: 26%; } }
+  @media (max-width: 380px) {
+    .bsg-yacht-infotabs .yacht-tab-image {
+      width: 100%; }
+      .bsg-yacht-infotabs .yacht-tab-image img {
+        margin: 0 auto; } }
+
+.yacht-requests {
+  display: inline-block;
+  vertical-align: middle;
+  width: 60.1626%;
+  float: right;
+  position: relative; }
+  .yacht-requests .popup-actions-wrapper {
+    text-align: center; }
+  .yacht-requests .fc-event-container {
+    display: none; }
+  .yacht-requests .fc-day.fc-widget-content.fc-future {
+    background: #dbffd9; }
+    .yacht-requests .fc-day.fc-widget-content.fc-future:not(.high-dens):hover {
+      cursor: pointer; }
+  .yacht-requests .fc-day.fc-widget-content.fc-past {
+    background: #f4f4f4; }
+  .yacht-requests .fc-day.fc-widget-content.fc-today {
+    cursor: pointer; }
+    .yacht-requests .fc-day.fc-widget-content.fc-today.high-dens, .yacht-requests .fc-day.fc-widget-content.fc-today.holiday {
+      cursor: default; }
+  .yacht-requests .selected {
+    background: #52c3ff !important;
+    color: #fff; }
+  .yacht-requests .close-btn {
+    float: right;
+    position: absolute;
+    top: -10px;
+    right: -15px;
+    background: black;
+    color: white;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    line-height: 28px;
+    z-index: 3; }
+    .yacht-requests .close-btn:hover {
+      cursor: pointer; }
+    @media (max-width: 480px) {
+      .yacht-requests .close-btn {
+        right: 0; } }
+  .yacht-requests .send-request-message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+    z-index: 2;
+    text-align: center;
+    padding: 50px 20px; }
+    .yacht-requests .send-request-message .success {
+      color: #0b7a2d;
+      font-weight: 600; }
+      .yacht-requests .send-request-message .success:after {
+        content: "";
+        display: block;
+        width: 150px;
+        height: 150px;
+        background: url(../images/custom-icons/success.svg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        margin: 0 auto;
+        margin-top: 30px; }
+    .yacht-requests .send-request-message .fail {
+      color: #ff5252;
+      font-weight: 600; }
+      .yacht-requests .send-request-message .fail:after {
+        content: "";
+        display: block;
+        width: 150px;
+        height: 150px;
+        background: url(../images/custom-icons/fail.svg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        margin: 0 auto;
+        margin-top: 30px; }
+  .yacht-requests .send-request-info {
+    font-weight: 500;
+    font-size: 18px;
+    background: #00a99d;
+    margin: -20px;
+    padding: 20px;
+    margin-bottom: 40px;
+    color: white; }
+  .yacht-requests .send-request-content label {
+    font-weight: 500; }
+  .yacht-requests .subheader {
+    display: block;
+    font-size: 14px;
+    font-size: 0.875rem;
+    font-weight: 300; }
+  .yacht-requests .send-request-misc-info {
+    margin-top: 20px; }
+    .yacht-requests .send-request-misc-info label {
+      font-weight: 500; }
+  .yacht-requests .request-date-wrapper {
+    margin: 10px 0; }
+    .yacht-requests .request-date-wrapper button {
+      border: none;
+      background: #e87915;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 15px;
+      -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+      margin-left: 20px; }
+      .yacht-requests .request-date-wrapper button.request-submit-btn {
+        margin-left: 10px;
+        background: #6cab4d; }
+    .yacht-requests .request-date-wrapper input {
+      background: #f4f4f4;
+      border: 1px solid #eaeaea;
+      height: 30px;
+      padding: 15px;
+      font-size: 15px;
+      position: relative; }
+      .yacht-requests .request-date-wrapper input:hover {
+        cursor: pointer;
+        -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+                box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15); }
+    .yacht-requests .request-date-wrapper .input-wrapper {
+      display: inline-block;
+      position: relative; }
+    .yacht-requests .request-date-wrapper .calendar-icon {
+      background: url(../images/custom-icons/calendar.svg);
+      backround-repeat: no-repeat;
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+              transform: translateY(-50%); }
+  .yacht-requests #calendar-send {
+    margin-top: 20px;
+    border-top: 1px solid #f2f2f2;
+    padding-top: 20px;
+    margin-bottom: 80px;
+    margin: -20px;
+    padding: 20px;
+    margin-top: 20px;
+    background: #fafafa; }
+    .yacht-requests #calendar-send .fc-left {
+      font-weight: 500; }
+      @media (max-width: 700px) {
+        .yacht-requests #calendar-send .fc-left {
+          display: block;
+          float: left;
+          width: 100%;
+          text-align: center; } }
+    @media (max-width: 700px) {
+      .yacht-requests #calendar-send .fc-center {
+        display: inline-block;
+        float: left; } }
+    @media (max-width: 480px) {
+      .yacht-requests #calendar-send .fc-center {
+        float: none !important;
+        width: 100%;
+        display: table; } }
+    @media (max-width: 480px) {
+      .yacht-requests #calendar-send .fc-right {
+        width: 100%;
+        margin: 20px 0; } }
+    @media (max-width: 480px) {
+      .yacht-requests #calendar-send .fc-month-view {
+        margin: 20px -20px; } }
+    .yacht-requests #calendar-send .density-notes {
+      padding: 20px 0; }
+      .yacht-requests #calendar-send .density-notes:after {
+        content: "";
+        display: block;
+        clear: both; }
+    .yacht-requests #calendar-send .note-row {
+      float: left;
+      width: 50%; }
+      @media (max-width: 600px) {
+        .yacht-requests #calendar-send .note-row {
+          width: 100%; } }
+    .yacht-requests #calendar-send .box {
+      display: inline-block;
+      vertical-align: middle;
+      width: 20px;
+      height: 20px;
+      margin-right: 10px; }
+      .yacht-requests #calendar-send .box.grey {
+        background: #ddd; }
+      .yacht-requests #calendar-send .box.light-yellow {
+        background: #fcf8e3; }
+      .yacht-requests #calendar-send .box.green {
+        background: #0b7a2d; }
+      .yacht-requests #calendar-send .box.orange {
+        background: #e87915; }
+      .yacht-requests #calendar-send .box.red {
+        background: #ff5252; }
+      .yacht-requests #calendar-send .box.blue {
+        background: #52c3ff; }
+    .yacht-requests #calendar-send .note-text {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 14px;
+      font-size: 0.875rem; }
+  .yacht-requests label {
+    min-width: 120px;
+    display: inline-block; }
+  .yacht-requests .yacht-name {
+    display: inline-block; }
+  @media (max-width: 1140px) {
+    .yacht-requests {
+      width: 100%;
+      float: none; } }
+
+.send-request {
+  position: absolute;
+  top: 0;
+  z-index: 3;
+  background: white;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); }
+  @media (max-width: 480px) {
+    .send-request {
+      width: 100vw;
+      left: -20px;
+      -webkit-box-shadow: 0 0px 130px rgba(0, 0, 0, 0.5);
+              box-shadow: 0 0px 130px rgba(0, 0, 0, 0.5); } }
+
+.yacht-requests-header h4 {
+  display: block;
+  font-family: "Alegreya";
+  font-size: 22px;
+  font-size: 1.375rem;
+  max-width: 120px;
+  border-bottom: 2px solid #148c8c;
+  margin-bottom: 20px; }
+
+.yacht-requests-content {
+  background: #fff;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  margin-top: 30px; }
+  .yacht-requests-content .latest-requests {
+    padding: 30px;
+    height: 260px;
+    overflow-y: auto; }
+    .yacht-requests-content .latest-requests div {
+      padding: 20px 0;
+      border-bottom: 1px solid #f4f4f4; }
+      .yacht-requests-content .latest-requests div:after {
+        content: "";
+        display: block;
+        clear: both; }
+      .yacht-requests-content .latest-requests div:last-child {
+        border-bottom: none; }
+      @media (max-width: 380px) {
+        .yacht-requests-content .latest-requests div {
+          padding: 10px 0; } }
+    .yacht-requests-content .latest-requests .request-type {
+      margin-right: 30px;
+      min-width: 70px;
+      display: inline-block; }
+    .yacht-requests-content .latest-requests .request-status {
+      float: right;
+      color: #999; }
+      @media (max-width: 380px) {
+        .yacht-requests-content .latest-requests .request-status {
+          float: none;
+          display: block; } }
+    .yacht-requests-content .latest-requests .request-edit {
+      float: right;
+      color: #148c8c;
+      margin-left: 10px;
+      padding-left: 10px;
+      border-left: 1px solid rgba(0, 0, 0, 0.15); }
+      .yacht-requests-content .latest-requests .request-edit:visited {
+        color: #148c8c; }
+      .yacht-requests-content .latest-requests .request-edit:hover {
+        color: #148c8c;
+        cursor: pointer; }
+      .yacht-requests-content .latest-requests .request-edit:active {
+        color: #148c8c; }
+      @media (max-width: 380px) {
+        .yacht-requests-content .latest-requests .request-edit {
+          float: none;
+          display: block; } }
+
+.yacht-requests-actions .action {
+  display: block;
+  padding: 20px 30px;
+  background: #eee;
+  color: #fff; }
+  .yacht-requests-actions .action:after {
+    content: "";
+    display: block;
+    clear: both; }
+  .yacht-requests-actions .action .title {
+    float: left;
+    line-height: 35px; }
+  .yacht-requests-actions .action .action-button {
+    float: right; }
+    .yacht-requests-actions .action .action-button:after {
+      content: "";
+      display: inline-block;
+      position: relative;
+      background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+      background-position: -800px -229px;
+      width: 35px;
+      height: 35px;
+      vertical-align: middle;
+      margin-left: 10px; }
+
+.yacht-requests-actions .active {
+  background: -webkit-gradient(linear, left top, right top, color-stop(20%, #0071bc), color-stop(80%, #00a99d));
+  background: linear-gradient(to right, #0071bc 20%, #00a99d 80%);
+  position: relative;
+  -webkit-transition: all 0.2s cubic-bezier(0.28, 0.04, 0.29, 1.01);
+  transition: all 0.2s cubic-bezier(0.28, 0.04, 0.29, 1.01); }
+  .yacht-requests-actions .active:hover {
+    cursor: pointer;
+    -webkit-box-shadow: 0 2px 10px 0px rgba(0, 0, 0, 0.45);
+            box-shadow: 0 2px 10px 0px rgba(0, 0, 0, 0.45); }
+  .yacht-requests-actions .active a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; }
+  .yacht-requests-actions .active .action-button:after {
+    content: "";
+    display: inline-block;
+    position: relative;
+    background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+    background-position: -800px -192px;
+    width: 35px;
+    height: 35px;
+    vertical-align: middle;
+    margin-left: 10px; }
+
+.pending-requests .full {
+  max-width: 1200px;
+  width: 100%;
+  padding: 30px;
+  margin-top: 30px;
+  background: #f4f4f4; }
+
+.btn {
+  background: #e87915;
+  padding: 8px 50px;
+  border-radius: 30px;
+  color: #fff;
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  min-width: 200px;
+  text-align: center; }
+  .btn:hover {
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); }
+  .btn.requests {
+    padding: 8px 40px; }
+
+#view-requests {
+  background: #e87915;
+  padding: 8px 40px;
+  border-radius: 30px;
+  color: #fff;
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%); }
+  #view-requests:hover {
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); }
+
+.tab {
+  background: rgba(13, 89, 89, 0.1);
+  color: #000;
+  display: inline-block;
+  padding: 8px 60px;
+  margin-right: 10px;
+  border-radius: 25px; }
+  .tab.active {
+    background: -webkit-gradient(linear, left top, right top, color-stop(20%, #0071bc), color-stop(80%, #00a99d));
+    background: linear-gradient(to right, #0071bc 20%, #00a99d 80%);
+    color: #fff; }
+  .tab:hover {
+    cursor: pointer;
+    background: -webkit-gradient(linear, left top, right top, color-stop(20%, #0071bc), color-stop(80%, #00a99d));
+    background: linear-gradient(to right, #0071bc 20%, #00a99d 80%);
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    color: #fff; }
+  @media (max-width: 620px) {
+    .tab {
+      padding: 8px 40px; } }
+  @media (max-width: 480px) {
+    .tab {
+      display: block;
+      text-align: center;
+      margin-bottom: 10px; } }
+
+.responsivefilters {
+  position: fixed !important;
+  bottom: -76px;
+  width: 350px;
+  -webkit-transition: all 0.55s;
+  transition: all 0.55s;
+  margin-bottom: 0 !important;
+  width: 200px;
+  z-index: 2; }
+  .responsivefilters h3 {
+    font-size: 18px;
+    position: relative; }
+    .responsivefilters h3:before {
+      content: "";
+      position: absolute;
+      right: -15px;
+      top: 0px;
+      -webkit-transform: translateY(-50%);
+              transform: translateY(-50%);
+      background: url(../images/custom-icons/plus-circle.svg);
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 20px;
+      height: 25px; }
+  .responsivefilters.open {
+    bottom: 0;
+    top: 127px;
+    margin-bottom: 0 !important;
+    -webkit-box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    width: 350px;
+    overflow-y: scroll;
+    z-index: 99; }
+    .responsivefilters.open h3 {
+      font-size: 24px;
+      font-size: 1.5rem;
+      position: relative; }
+      .responsivefilters.open h3:before {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 20px;
+        -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+        background: url(../images/custom-icons/minus-circle.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 20px;
+        height: 25px; }
+    .responsivefilters.open:hover {
+      bottom: 0;
+      cursor: pointer; }
+    .responsivefilters.open .filters-wrapper {
+      display: block; }
+    @media (max-width: 450px) {
+      .responsivefilters.open {
+        width: 100%; } }
+  .responsivefilters:hover {
+    bottom: -50px;
+    cursor: pointer; }
+  .responsivefilters .filters-wrapper {
+    display: none; }
+  @media (max-width: 700px) {
+    .responsivefilters {
+      width: 50%; } }
+  .responsivefilters #view-requests {
+    display: block;
+    text-align: center;
+    -webkit-transform: none;
+            transform: none;
+    left: auto;
+    top: auto;
+    position: relative; }
+
+.filters.responsivefilters {
+  right: 0; }
+
+.requests.responsivefilters {
+  right: 200px;
+  bottom: -42px; }
+  .requests.responsivefilters.open {
+    overflow-y: scroll;
+    bottom: 0;
+    top: 127px;
+    margin-bottom: 0 !important;
+    width: 350px;
+    z-index: 99; }
+    .requests.responsivefilters.open:hover {
+      bottom: 0;
+      cursor: pointer; }
+    .requests.responsivefilters.open .filters-wrapper {
+      display: block; }
+    @media (max-width: 450px) {
+      .requests.responsivefilters.open {
+        width: 100%; } }
+  .requests.responsivefilters:hover {
+    bottom: -30px;
+    cursor: pointer; }
+  @media (max-width: 700px) {
+    .requests.responsivefilters {
+      left: 0; } }
+
+.main-content-wrapper {
+  width: calc(100% - 165px);
+  float: right;
+  height: 100%; }
+  .main-content-wrapper:after {
+    content: "";
+    display: block;
+    clear: both; }
+  @media (max-width: 960px) {
+    .main-content-wrapper {
+      width: 100%; } }
+
+main {
+  float: left;
+  width: 75.86207%;
+  padding: 90px 45px; }
+  @media (max-width: 960px) {
+    main {
+      padding: 70px 15px; } }
+
+.bsg-yacht-infotabs {
+  margin-top: 90px;
+  min-height: 200px;
+  width: 100%;
+  clear: both;
+  padding-top: 90px; }
+
+.datalist-right-sidebar,
+.right-sidebar {
+  float: right;
+  padding-top: 90px;
+  width: 420px;
+  height: 100%; }
+  @media (max-width: 1600px) {
+    .datalist-right-sidebar,
+    .right-sidebar {
+      width: 350px; } }
+
+@media (max-width: 1500px) {
+  .page-node-type-yacht #general-container {
+    display: table !important;
+    width: 100%;
+    padding: 60px; }
+    .page-node-type-yacht #general-container main {
+      float: none;
+      display: table-footer-group;
+      width: 100%; } }
+
+@media (max-width: 1220px) {
+  .page-node-type-yacht #general-container {
+    padding: 30px; } }
+
+@media (max-width: 570px) {
+  .page-node-type-yacht #general-container {
+    padding: 20px; } }
+
+.page-node-type-yacht .right-sidebar {
+  width: 24.13793%; }
+  @media (max-width: 1500px) {
+    .page-node-type-yacht .right-sidebar {
+      display: table-header-group;
+      width: 100%;
+      padding-top: 40px; }
+      .page-node-type-yacht .right-sidebar .user-info-header {
+        float: left;
+        padding: 20px 70px;
+        margin-right: 30px; }
+        .page-node-type-yacht .right-sidebar .user-info-header img {
+          width: 50%; } }
+  @media (max-width: 700px) {
+    .page-node-type-yacht .right-sidebar .user-info-header {
+      padding: 20px; } }
+  @media (max-width: 570px) {
+    .page-node-type-yacht .right-sidebar {
+      display: none; } }
+  @media (max-width: 1500px) {
+    .page-node-type-yacht .right-sidebar .profile {
+      display: table;
+      width: 690px;
+      margin-bottom: 60px; }
+      .page-node-type-yacht .right-sidebar .profile .user-info-contact {
+        padding-bottom: 0; }
+      .page-node-type-yacht .right-sidebar .profile .btn {
+        position: relative;
+        top: auto;
+        left: auto;
+        -webkit-transform: none;
+                transform: none; } }
+  @media (max-width: 1140px) {
+    .page-node-type-yacht .right-sidebar .profile {
+      width: 100%; } }
+
+.profile {
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  position: relative; }
+
+.user-info-header {
+  background: #f9f9f9;
+  text-align: center;
+  padding: 50px 10px 30px 10px; }
+  .user-info-header-fullname {
+    font-size: 0; }
+    .user-info-header-fullname .field {
+      font-size: 20px;
+      font-size: 1.25rem;
+      width: auto;
+      display: inline-block; }
+      .user-info-header-fullname .field:first-child {
+        margin-right: 5px; }
+  .user-info-header h3 {
+    font-family: "Alegreya";
+    color: #0d5959; }
+    .user-info-header h3:after {
+      content: "";
+      width: 50px;
+      height: 2px;
+      display: block;
+      background: #0d5959;
+      margin: 0 auto; }
+  .user-info-header img {
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-top: 25px;
+    margin-bottom: 15px; }
+
+.user-info-contact {
+  padding: 35px 0 60px 25px; }
+  .user-info-contact h4 {
+    color: #ccc;
+    font-weight: 400;
+    margin-bottom: 15px; }
+  .user-info-contact .field--name-field-user-email {
+    margin-bottom: 15px; }
+    .user-info-contact .field--name-field-user-email:before {
+      content: "";
+      display: inline-block;
+      vertical-align: top;
+      background: url(../images/custom-icons/email.svg);
+      width: 28px;
+      height: 20px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position-x: 50%;
+      margin-right: 30px; }
+  .user-info-contact .field--name-field-user-telephone {
+    margin-bottom: 15px; }
+    .user-info-contact .field--name-field-user-telephone:before {
+      content: "";
+      display: inline-block;
+      vertical-align: top;
+      background: url(../images/custom-icons/mobile.svg);
+      width: 28px;
+      height: 30px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position-x: 50%;
+      margin-right: 30px; }
+
+#bsg-datalist main {
+  width: 100%;
+  overflow-x: hidden;
+  padding-right: 0;
+  padding-top: 70px; }
+  @media (max-width: 1600px) {
+    #bsg-datalist main {
+      padding-right: 45px; } }
+  @media (max-width: 960px) {
+    #bsg-datalist main {
+      padding-right: 15px; } }
+
+#bsg-datalist iframe {
+  border: none;
+  width: 100%;
+  max-width: 1300px;
+  margin-top: 30px;
+  height: 700px; }
+
+#bsg-datalist h2 {
+  display: block;
+  font-family: "Alegreya";
+  font-size: 32px;
+  font-size: 2rem;
+  max-width: 120px;
+  border-bottom: 2px solid #148c8c;
+  margin-bottom: 10px; }
+
+#bsg-datalist .datalist-container {
+  float: left;
+  width: calc(100% - 470px); }
+  @media (max-width: 1600px) {
+    #bsg-datalist .datalist-container {
+      width: calc(100% - 350px);
+      width: 100%; } }
+
+#bsg-datalist .datalist-content {
+  overflow-x: hidden;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); }
+  #bsg-datalist .datalist-content .xs {
+    width: 6%; }
+  #bsg-datalist .datalist-content .sm {
+    width: 8%; }
+  #bsg-datalist .datalist-content .lg {
+    width: 14%; }
+  #bsg-datalist .datalist-content .edit a {
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    color: #00a99d; }
+    #bsg-datalist .datalist-content .edit a:visited {
+      color: #00a99d; }
+    #bsg-datalist .datalist-content .edit a:hover {
+      color: #00a99d;
+      cursor: pointer; }
+    #bsg-datalist .datalist-content .edit a:active {
+      color: #00a99d; }
+  #bsg-datalist .datalist-content .sy {
+    background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+    background-position: -800px -458px;
+    width: 30px;
+    height: 30px;
+    display: inline-block; }
+  #bsg-datalist .datalist-content .mb {
+    background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+    background-position: -800px -490px;
+    width: 46px;
+    height: 17px;
+    display: inline-block; }
+  #bsg-datalist .datalist-content .cm {
+    background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+    background-position: -800px -266px;
+    width: 30px;
+    height: 30px;
+    display: inline-block; }
+  #bsg-datalist .datalist-content .flag {
+    display: inline-block;
+    text-indent: -9999999px; }
+  #bsg-datalist .datalist-content table {
+    width: 100%;
+    background: -webkit-gradient(linear, left top, right top, color-stop(20%, #0071bc), color-stop(80%, #00a99d));
+    background: linear-gradient(to right, #0071bc 20%, #00a99d 80%); }
+    #bsg-datalist .datalist-content table a {
+      -webkit-transition: 0.5s;
+      transition: 0.5s;
+      color: #000; }
+      #bsg-datalist .datalist-content table a:visited {
+        color: #000; }
+      #bsg-datalist .datalist-content table a:hover {
+        color: #000;
+        cursor: pointer; }
+      #bsg-datalist .datalist-content table a:active {
+        color: #000; }
+  #bsg-datalist .datalist-content thead {
+    color: #fff; }
+    #bsg-datalist .datalist-content thead tr {
+      background: none; }
+  #bsg-datalist .datalist-content tr td,
+  #bsg-datalist .datalist-content th {
+    text-align: center;
+    width: 11.11111%;
+    padding: 20px 10px; }
+  #bsg-datalist .datalist-content td {
+    padding: 10px; }
+  #bsg-datalist .datalist-content th {
+    font-family: "Alegreya";
+    font-size: 18px;
+    font-size: 1.125rem; }
+  #bsg-datalist .datalist-content tr {
+    background: #fff; }
+    #bsg-datalist .datalist-content tr:nth-child(2n) {
+      background: #eaefed; }
+
+#bsg-datalist .datalist-pager {
+  color: rgba(13, 89, 89, 0.1);
+  font-size: 15px;
+  text-align: right;
+  margin-bottom: 10px; }
+  #bsg-datalist .datalist-pager span {
+    margin: 0 5px; }
+  #bsg-datalist .datalist-pager .active {
+    cursor: pointer;
+    color: #148c8c; }
+
+#bsg-datalist .datalist-calendar {
+  float: left;
+  width: calc(100% - 470px);
+  overflow-x: hidden;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); }
+
+#bsg-datalist .datalist-right-sidebar {
+  padding-top: 0;
+  margin-left: 50px; }
+  #bsg-datalist .datalist-right-sidebar .content-wrapper {
+    padding: 20px;
+    background: #f4f4f4;
+    margin-bottom: 60px;
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    position: relative; }
+    @media (max-width: 360px) {
+      #bsg-datalist .datalist-right-sidebar .content-wrapper {
+        padding: 10px; } }
+  #bsg-datalist .datalist-right-sidebar h3 {
+    text-align: center;
+    display: block;
+    font-family: "Alegreya";
+    padding-bottom: 5px;
+    margin-bottom: 30px; }
+    #bsg-datalist .datalist-right-sidebar h3:after {
+      content: "";
+      display: block;
+      margin: 0 auto;
+      width: 50px;
+      height: 2px;
+      background: #0d5959;
+      position: relative; }
+  #bsg-datalist .datalist-right-sidebar .filter .form-control {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    -webkit-transition: ease-in;
+    transition: ease-in;
+    padding: 10px; }
+    #bsg-datalist .datalist-right-sidebar .filter .form-control:focus {
+      -webkit-box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.15);
+              box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.15);
+      border: 1px solid #c5c5c5; }
+  #bsg-datalist .datalist-right-sidebar .filter > label,
+  #bsg-datalist .datalist-right-sidebar .checkbox-container > label {
+    margin: 30px 0 15px 0;
+    font-weight: 600;
+    color: #0d5959; }
+    @media (max-width: 960px) {
+      #bsg-datalist .datalist-right-sidebar .filter > label,
+      #bsg-datalist .datalist-right-sidebar .checkbox-container > label {
+        font-size: 0.875rem; } }
+  #bsg-datalist .datalist-right-sidebar label {
+    display: block; }
+    @media (max-width: 960px) {
+      #bsg-datalist .datalist-right-sidebar label {
+        font-size: 0.875rem; } }
+  #bsg-datalist .datalist-right-sidebar .checkbox-container {
+    display: block;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 30px; }
+  #bsg-datalist .datalist-right-sidebar .checkbox-wrapper {
+    display: inline-block; }
+    #bsg-datalist .datalist-right-sidebar .checkbox-wrapper.sm-col {
+      width: 25%; }
+    #bsg-datalist .datalist-right-sidebar .checkbox-wrapper.md-col {
+      width: 30%; }
+    #bsg-datalist .datalist-right-sidebar .checkbox-wrapper input[type="checkbox"] {
+      display: inline-block;
+      vertical-align: middle;
+      height: 20px;
+      position: relative;
+      left: -999em;
+      /* hide the real checkbox */ }
+    #bsg-datalist .datalist-right-sidebar .checkbox-wrapper .checkbox-target {
+      display: inline-block;
+      vertical-align: middle;
+      float: left; }
+    #bsg-datalist .datalist-right-sidebar .checkbox-wrapper input[type='checkbox'] + span.checkbox-target:after {
+      content: "";
+      border: 1px solid #ccc;
+      background: #fff;
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      vertical-align: text-bottom;
+      border-radius: 4px; }
+    #bsg-datalist .datalist-right-sidebar .checkbox-wrapper input[type='checkbox']:checked + span.checkbox-target:after {
+      content: "";
+      background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+      background-position: -800px -509px;
+      width: 20px;
+      height: 20px;
+      color: #fff;
+      background-color: #148c8c;
+      line-height: 19px;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      border: 1px solid #148c8c;
+      border-radius: 4px; }
+    #bsg-datalist .datalist-right-sidebar .checkbox-wrapper .filter-label {
+      float: left;
+      margin-left: 5px; }
+    #bsg-datalist .datalist-right-sidebar .checkbox-wrapper label {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 5px;
+      min-width: 20px;
+      font-size: 16px;
+      font-size: 1rem; }
+      @media (max-width: 960px) {
+        #bsg-datalist .datalist-right-sidebar .checkbox-wrapper label {
+          font-size: 0.875rem; } }
+  #bsg-datalist .datalist-right-sidebar .reset-filters {
+    color: #0d5959;
+    display: block;
+    margin-top: 40px;
+    font-family: "Ubuntu";
+    font-size: 16px;
+    font-size: 1rem;
+    font-weight: 400; }
+    #bsg-datalist .datalist-right-sidebar .reset-filters:before {
+      content: "X";
+      display: inline-block;
+      position: relative;
+      margin-right: 5px; }
+    #bsg-datalist .datalist-right-sidebar .reset-filters:hover {
+      cursor: pointer; }
+  @media (max-width: 1600px) {
+    #bsg-datalist .datalist-right-sidebar {
+      margin-left: 0; } }
+
+.fade-enter-active,
+.fade-leave-active {
+  -webkit-transition: opacity 1s;
+  transition: opacity 1s; }
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0; }
+
+@media screen and (max-width: 730px) {
+  #bsg-datalist .datalist-content table.card {
+    border: 0; }
+    #bsg-datalist .datalist-content table.card .xs, #bsg-datalist .datalist-content table.card .sm, #bsg-datalist .datalist-content table.card .lg, #bsg-datalist .datalist-content table.card td {
+      width: auto;
+      padding: 0;
+      text-align: left; }
+      #bsg-datalist .datalist-content table.card .xs .bt-content, #bsg-datalist .datalist-content table.card .xs a, #bsg-datalist .datalist-content table.card .sm .bt-content, #bsg-datalist .datalist-content table.card .sm a, #bsg-datalist .datalist-content table.card .lg .bt-content, #bsg-datalist .datalist-content table.card .lg a, #bsg-datalist .datalist-content table.card td .bt-content, #bsg-datalist .datalist-content table.card td a {
+        background: #fff;
+        padding: 20px;
+        width: 100%;
+        color: #000;
+        width: calc(100% - 140px);
+        float: left;
+        border: 1px solid #fff;
+        text-align: left;
+        line-height: 20px; }
+  #bsg-datalist .datalist-content table.card thead {
+    display: none; }
+  #bsg-datalist .datalist-content table.card tr {
+    display: block;
+    border-bottom: 1px solid #f4f4f4;
+    background: -webkit-gradient(linear, left top, right top, color-stop(20%, #0071bc), color-stop(80%, #00a99d));
+    background: linear-gradient(to right, #0071bc 20%, #00a99d 80%);
+    color: #fff; }
+  #bsg-datalist .datalist-content table.card td {
+    display: block;
+    text-align: right;
+    font-size: 13px; }
+    #bsg-datalist .datalist-content table.card td:after {
+      content: "";
+      display: block;
+      clear: both; }
+  #bsg-datalist .datalist-content table.card td:last-child {
+    border-bottom: 0; }
+  #bsg-datalist .datalist-content table.card td::before {
+    content: attr(data-label);
+    width: 100px;
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    float: left;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: left; }
+  #bsg-datalist .datalist-content .card tbody {
+    line-height: 0 !important; } }
+
+#bsg-datalist .datalist-calendar {
+  -webkit-box-shadow: none;
+          box-shadow: none; }
+  #bsg-datalist .datalist-calendar h2 {
+    max-width: 100%;
+    font-family: "Ubuntu";
+    border: none; }
+  @media (max-width: 1600px) {
+    #bsg-datalist .datalist-calendar {
+      width: 100%; } }
+
+.is_week {
+  overflow-x: scroll !important; }
+  .is_week #calendar {
+    width: 800px; }
+
+.calendar-btn {
+  border: none;
+  background: #148c8c;
+  color: #fff;
+  padding: 6px 20px; }
+  .calendar-btn:hover {
+    cursor: pointer;
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); }
+  .calendar-btn.active {
+    background: #e87915; }
+
+.calendar-actions {
+  margin: 20px 0; }
+
+#calendar-send .fc-state-default,
+.datalist-calendar .fc-state-default {
+  background-color: #148c8c;
+  background-image: none;
+  color: #fff;
+  text-shadow: none;
+  border-radius: 0 !important; }
+  @media (max-width: 360px) {
+    #calendar-send .fc-state-default,
+    .datalist-calendar .fc-state-default {
+      padding: 0 6px; } }
+
+#calendar-send .fc-state-active,
+.datalist-calendar .fc-state-active {
+  background-color: #0d5959; }
+  @media (max-width: 360px) {
+    #calendar-send .fc-state-active,
+    .datalist-calendar .fc-state-active {
+      padding: 0 6px; } }
+
+@media (max-width: 360px) {
+  #calendar-send .fc-center,
+  .datalist-calendar .fc-center {
+    margin-top: 30px; } }
+
+#calendar-send .fc-event,
+.datalist-calendar .fc-event {
+  background-color: transparent;
+  min-height: 40px;
+  border: none;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 10px; }
+
+#calendar-send .fc-day-grid-event .fc-content,
+.datalist-calendar .fc-day-grid-event .fc-content {
+  white-space: unset;
+  overflow: visible; }
+
+#calendar-send .edit-action,
+.datalist-calendar .edit-action {
+  float: right;
+  line-height: 30px;
+  padding: 0 10px;
+  font-size: 16px;
+  font-size: 1rem; }
+  #calendar-send .edit-action a,
+  .datalist-calendar .edit-action a {
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    color: #00a99d; }
+    #calendar-send .edit-action a:visited,
+    .datalist-calendar .edit-action a:visited {
+      color: #00a99d; }
+    #calendar-send .edit-action a:hover,
+    .datalist-calendar .edit-action a:hover {
+      color: #00a99d;
+      cursor: pointer; }
+    #calendar-send .edit-action a:active,
+    .datalist-calendar .edit-action a:active {
+      color: #00a99d; }
+
+.calendar-status {
+  float: right;
+  line-height: 25px; }
+  @media (max-width: 400px) {
+    .calendar-status {
+      display: block;
+      width: 100%;
+      margin: 10px 0; } }
+
+tr.fc-list-item:nth-child(2n) {
+  background: rgba(13, 89, 89, 0.1); }
+
+.fc-unthemed .fc-list-heading td {
+  background: #fff !important; }
+
+.fc-list-item-time,
+.fc-time {
+  display: none; }
+
+.fc-list-table .fc-list-item-title {
+  line-height: 30px; }
+
+.fc-list-item-title a {
+  display: inline-block;
+  max-width: 250px; }
+
+.fc-basicDay-view .fc-content-skeleton tr:nth-child(2n) {
+  background: rgba(13, 89, 89, 0.1); }
+
+.fc-basicDay-view .fc-content-skeleton tr a {
+  color: #000; }
+  .fc-basicDay-view .fc-content-skeleton tr a:hover {
+    color: #000; }
+
+.fc-basicDay-view .fc-content-skeleton .fc-content {
+  float: left; }
+
+.fc-basicDay-view .fc-content-skeleton .calendar-status {
+  float: right !important;
+  font-size: 16px;
+  font-size: 1rem; }
+
+.fc-basicDay-view .fc-content-skeleton .fc-title {
+  display: inline-block;
+  font-size: 16px;
+  font-size: 1rem; }
+
+.fc-basicWeek-view .fc-day-grid-event .fc-title {
+  display: block;
+  color: #000; }
+
+.fc-basicWeek-view .fc-day-grid-event.approved .calendar-status, .fc-basicWeek-view .fc-day-grid-event.completed .calendar-status, .fc-basicWeek-view .fc-day-grid-event.pending .calendar-status, .fc-basicWeek-view .fc-day-grid-event.progress .calendar-status {
+  float: none; }
+  .fc-basicWeek-view .fc-day-grid-event.approved .calendar-status:after, .fc-basicWeek-view .fc-day-grid-event.completed .calendar-status:after, .fc-basicWeek-view .fc-day-grid-event.pending .calendar-status:after, .fc-basicWeek-view .fc-day-grid-event.progress .calendar-status:after {
+    content: none; }
+
+.pending {
+  position: relative; }
+  .pending .calendar-status {
+    color: #700fbc; }
+    .pending .calendar-status:after {
+      content: "";
+      position: relative;
+      background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+      background-position: -800px -426px;
+      width: 30px;
+      height: 30px;
+      display: inline-block;
+      vertical-align: middle; }
+
+.completed {
+  position: relative; }
+  .completed .calendar-status {
+    color: #0b7a2d; }
+    .completed .calendar-status:after {
+      content: "";
+      position: relative;
+      background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+      background-position: -800px -298px;
+      width: 30px;
+      height: 30px;
+      display: inline-block;
+      vertical-align: middle; }
+
+.progress,
+.approved {
+  position: relative; }
+  .progress .calendar-status,
+  .approved .calendar-status {
+    color: #f4b12c; }
+    .progress .calendar-status:after,
+    .approved .calendar-status:after {
+      content: "";
+      position: relative;
+      background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+      background-position: -800px -330px;
+      width: 30px;
+      height: 30px;
+      display: inline-block;
+      vertical-align: middle; }
+
+.pending-requests ul {
+  margin: 0 20px;
+  list-style-type: disc; }
+
+.pending-requests li {
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd; }
+  .pending-requests li a {
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    color: #000; }
+    .pending-requests li a:visited {
+      color: #000; }
+    .pending-requests li a:hover {
+      color: #000;
+      cursor: pointer; }
+    .pending-requests li a:active {
+      color: #000; }
+  .pending-requests li a:hover {
+    text-decoration: underline; }
+  .pending-requests li:last-child {
+    border-bottom: none; }
+
+.samoa {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -700px -100px;
+  width: 48px;
+  height: 48px; }
+
+.kenya {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -350px -500px;
+  width: 48px;
+  height: 48px; }
+
+.afghanistan {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -200px -550px;
+  width: 48px;
+  height: 48px; }
+
+.russia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -400px -650px;
+  width: 48px;
+  height: 48px; }
+
+.guatemala {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -200px -450px;
+  width: 48px;
+  height: 48px; }
+
+.bolivia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -250px -150px;
+  width: 48px;
+  height: 48px; }
+
+.ghana {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -450px -300px;
+  width: 48px;
+  height: 48px; }
+
+.hungary {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -500px -100px;
+  width: 48px;
+  height: 48px; }
+
+.saint-helena {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -550px -650px;
+  width: 48px;
+  height: 48px; }
+
+.iceland {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -500px -150px;
+  width: 48px;
+  height: 48px; }
+
+.south-sudan {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -350px -700px;
+  width: 48px;
+  height: 48px; }
+
+.poland {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -50px -650px;
+  width: 48px;
+  height: 48px; }
+
+.china {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -250px -300px;
+  width: 48px;
+  height: 48px; }
+
+.argentina {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -150px -100px;
+  width: 48px;
+  height: 48px; }
+
+.cape-verde {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: 0px -300px;
+  width: 48px;
+  height: 48px; }
+
+.kazakhstan {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -300px -500px;
+  width: 48px;
+  height: 48px; }
+
+.guernsey {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -250px -450px;
+  width: 48px;
+  height: 48px; }
+
+.venezuela {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -550px -750px;
+  width: 48px;
+  height: 48px; }
+
+.liberia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -550px -250px;
+  width: 48px;
+  height: 48px; }
+
+.colombia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -350px -50px;
+  width: 48px;
+  height: 48px; }
+
+.saint-martin {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -700px 0px;
+  width: 48px;
+  height: 48px; }
+
+.iran {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -500px -300px;
+  width: 48px;
+  height: 48px; }
+
+.namibia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -50px -600px;
+  width: 48px;
+  height: 48px; }
+
+.tanzania {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -750px -150px;
+  width: 48px;
+  height: 48px; }
+
+.jamaica {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -100px -500px;
+  width: 48px;
+  height: 48px; }
+
+.saudi-arabia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -700px -250px;
+  width: 48px;
+  height: 48px; }
+
+.zambia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -800px -50px;
+  width: 48px;
+  height: 48px; }
+
+.cambodia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -300px -100px;
+  width: 48px;
+  height: 48px; }
+
+.djibouti {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -350px -350px;
+  width: 48px;
+  height: 48px; }
+
+.cocos-keeling-islands {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -350px 0px;
+  width: 48px;
+  height: 48px; }
+
+.angola {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -50px -100px;
+  width: 48px;
+  height: 48px; }
+
+.lesotho {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -550px -200px;
+  width: 48px;
+  height: 48px; }
+
+.scotland {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -700px -300px;
+  width: 48px;
+  height: 48px; }
+
+.tunisia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -750px -450px;
+  width: 48px;
+  height: 48px; }
+
+.nagorno-karabakh {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: 0px -600px;
+  width: 48px;
+  height: 48px; }
+
+.ukraine {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -50px -750px;
+  width: 48px;
+  height: 48px; }
+
+.marshall-islands {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -400px -550px;
+  width: 48px;
+  height: 48px; }
+
+.guinea {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -350px -450px;
+  width: 48px;
+  height: 48px; }
+
+.new-caledonia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -300px -600px;
+  width: 48px;
+  height: 48px; }
+
+.democratic-republic-of-the-congo {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -250px -350px;
+  width: 48px;
+  height: 48px; }
+
+.estonia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -50px -400px;
+  width: 48px;
+  height: 48px; }
+
+.laos {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -550px -50px;
+  width: 48px;
+  height: 48px; }
+
+.kyrgyzstan {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -550px 0px;
+  width: 48px;
+  height: 48px; }
+
+.tajikistan {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -750px -100px;
+  width: 48px;
+  height: 48px; }
+
+.cuba {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -50px -350px;
+  width: 48px;
+  height: 48px; }
+
+.south-ossetia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -300px -700px;
+  width: 48px;
+  height: 48px; }
+
+.kosovo {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -450px -500px;
+  width: 48px;
+  height: 48px; }
+
+.greenland {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -50px -450px;
+  width: 48px;
+  height: 48px; }
+
+.antarctica {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -150px 0px;
+  width: 48px;
+  height: 48px; }
+
+.algeria {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -100px 0px;
+  width: 48px;
+  height: 48px; }
+
+.united-nations {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -200px -750px;
+  width: 48px;
+  height: 48px; }
+
+.mars {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -350px -550px;
+  width: 48px;
+  height: 48px; }
+
+.curacao {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -100px -350px;
+  width: 48px;
+  height: 48px; }
+
+.aruba {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -50px -150px;
+  width: 48px;
+  height: 48px; }
+
+.somaliland {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -100px -700px;
+  width: 48px;
+  height: 48px; }
+
+.rwanda {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -450px -650px;
+  width: 48px;
+  height: 48px; }
+
+.cook-islands {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -350px -200px;
+  width: 48px;
+  height: 48px; }
+
+.honduras {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -500px 0px;
+  width: 48px;
+  height: 48px; }
+
+.armenia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: 0px -150px;
+  width: 48px;
+  height: 48px; }
+
+.kiribati {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -400px -500px;
+  width: 48px;
+  height: 48px; }
+
+.niue {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -550px -600px;
+  width: 48px;
+  height: 48px; }
+
+.olympics {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -650px -150px;
+  width: 48px;
+  height: 48px; }
+
+.british-virgin-islands {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -150px -250px;
+  width: 48px;
+  height: 48px; }
+
+.commonwealth {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -350px -100px;
+  width: 48px;
+  height: 48px; }
+
+.south-korea {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -250px -700px;
+  width: 48px;
+  height: 48px; }
+
+.taiwan {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -750px -50px;
+  width: 48px;
+  height: 48px; }
+
+.guam {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -150px -450px;
+  width: 48px;
+  height: 48px; }
+
+.east-timor {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -400px -100px;
+  width: 48px;
+  height: 48px; }
+
+.puerto-rico {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -150px -650px;
+  width: 48px;
+  height: 48px; }
+
+.republic-of-the-congo {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -300px -650px;
+  width: 48px;
+  height: 48px; }
+
+.turkey {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -750px -500px;
+  width: 48px;
+  height: 48px; }
+
+.monaco {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -600px -200px;
+  width: 48px;
+  height: 48px; }
+
+.french-polynesia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -450px 0px;
+  width: 48px;
+  height: 48px; }
+
+.australia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -100px -150px;
+  width: 48px;
+  height: 48px; }
+
+.sierra-leone {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -700px -500px;
+  width: 48px;
+  height: 48px; }
+
+.cameroon {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -300px -150px;
+  width: 48px;
+  height: 48px; }
+
+.nepal {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -150px -600px;
+  width: 48px;
+  height: 48px; }
+
+.england {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -400px -300px;
+  width: 48px;
+  height: 48px; }
+
+.gibraltar {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -450px -350px;
+  width: 48px;
+  height: 48px; }
+
+.isle-of-man {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -500px -450px;
+  width: 48px;
+  height: 48px; }
+
+.czech-republic {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -200px -350px;
+  width: 48px;
+  height: 48px; }
+
+.sweden {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -650px -700px;
+  width: 48px;
+  height: 48px; }
+
+.burundi {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -300px -50px;
+  width: 48px;
+  height: 48px; }
+
+.seychelles {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -700px -450px;
+  width: 48px;
+  height: 48px; }
+
+.moldova {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -600px -150px;
+  width: 48px;
+  height: 48px; }
+
+.unknown {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -300px -750px;
+  width: 48px;
+  height: 48px; }
+
+.belgium {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -150px -200px;
+  width: 48px;
+  height: 48px; }
+
+.macau {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -550px -500px;
+  width: 48px;
+  height: 48px; }
+
+.pitcairn-islands {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: 0px -650px;
+  width: 48px;
+  height: 48px; }
+
+.brazil {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -50px -250px;
+  width: 48px;
+  height: 48px; }
+
+.mozambique {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -600px -450px;
+  width: 48px;
+  height: 48px; }
+
+.benin {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -250px 0px;
+  width: 48px;
+  height: 48px; }
+
+.greece {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: 0px -450px;
+  width: 48px;
+  height: 48px; }
+
+.andorra {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: 0px -100px;
+  width: 48px;
+  height: 48px; }
+
+.ecuador {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -400px -150px;
+  width: 48px;
+  height: 48px; }
+
+.netherlands-antilles {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -200px -600px;
+  width: 48px;
+  height: 48px; }
+
+.cyprus {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -150px -350px;
+  width: 48px;
+  height: 48px; }
+
+.gabon {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -450px -100px;
+  width: 48px;
+  height: 48px; }
+
+.libya {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -550px -300px;
+  width: 48px;
+  height: 48px; }
+
+.syria {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -750px 0px;
+  width: 48px;
+  height: 48px; }
+
+.burkina-faso {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -300px 0px;
+  width: 48px;
+  height: 48px; }
+
+.tonga {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -750px -350px;
+  width: 48px;
+  height: 48px; }
+
+.saint-barthelemy {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -500px -650px;
+  width: 48px;
+  height: 48px; }
+
+.macedonia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: 0px -550px;
+  width: 48px;
+  height: 48px; }
+
+.montserrat {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -600px -350px;
+  width: 48px;
+  height: 48px; }
+
+.christmas-island {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -300px -300px;
+  width: 48px;
+  height: 48px; }
+
+.montenegro {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -600px -300px;
+  width: 48px;
+  height: 48px; }
+
+.bermuda {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -250px -50px;
+  width: 48px;
+  height: 48px; }
+
+.grenada {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -100px -450px;
+  width: 48px;
+  height: 48px; }
+
+.madagascar {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -50px -550px;
+  width: 48px;
+  height: 48px; }
+
+.north-korea {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -650px 0px;
+  width: 48px;
+  height: 48px; }
+
+.senegal {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -700px -350px;
+  width: 48px;
+  height: 48px; }
+
+.oman {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -650px -200px;
+  width: 48px;
+  height: 48px; }
+
+.malaysia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -150px -550px;
+  width: 48px;
+  height: 48px; }
+
+.papua-new-guinea {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -650px -450px;
+  width: 48px;
+  height: 48px; }
+
+.comoros {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -350px -150px;
+  width: 48px;
+  height: 48px; }
+
+.panama {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -650px -400px;
+  width: 48px;
+  height: 48px; }
+
+.costa-rica {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -350px -250px;
+  width: 48px;
+  height: 48px; }
+
+.switzerland {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -700px -700px;
+  width: 48px;
+  height: 48px; }
+
+.equatorial-guinea {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -400px -350px;
+  width: 48px;
+  height: 48px; }
+
+.french-southern-territories {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -450px -50px;
+  width: 48px;
+  height: 48px; }
+
+.saint-kitts-and-nevis {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -600px -650px;
+  width: 48px;
+  height: 48px; }
+
+.nigeria {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -500px -600px;
+  width: 48px;
+  height: 48px; }
+
+.trinidad-and-tobago {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -750px -400px;
+  width: 48px;
+  height: 48px; }
+
+.canary-islands {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -300px -250px;
+  width: 48px;
+  height: 48px; }
+
+.dominican-republic {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -400px -50px;
+  width: 48px;
+  height: 48px; }
+
+.bosnia-and-herzegovina {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -250px -200px;
+  width: 48px;
+  height: 48px; }
+
+.micronesia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -600px -100px;
+  width: 48px;
+  height: 48px; }
+
+.anguilla {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -100px -100px;
+  width: 48px;
+  height: 48px; }
+
+.canada {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -300px -200px;
+  width: 48px;
+  height: 48px; }
+
+.guyana {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -400px -450px;
+  width: 48px;
+  height: 48px; }
+
+.cayman-islands {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -50px -300px;
+  width: 48px;
+  height: 48px; }
+
+.united-kingdom {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -150px -750px;
+  width: 48px;
+  height: 48px; }
+
+.wallis-and-futuna {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -700px -750px;
+  width: 48px;
+  height: 48px; }
+
+.yemen {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -800px 0px;
+  width: 48px;
+  height: 48px; }
+
+.gambia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -450px -150px;
+  width: 48px;
+  height: 48px; }
+
+.togo {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -750px -250px;
+  width: 48px;
+  height: 48px; }
+
+.tokelau {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -750px -300px;
+  width: 48px;
+  height: 48px; }
+
+.pakistan {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -650px -250px;
+  width: 48px;
+  height: 48px; }
+
+.hong-kong {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -500px -50px;
+  width: 48px;
+  height: 48px; }
+
+.solomon-islands {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: 0px -700px;
+  width: 48px;
+  height: 48px; }
+
+.bulgaria {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -250px -250px;
+  width: 48px;
+  height: 48px; }
+
+.mauritania {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -500px -550px;
+  width: 48px;
+  height: 48px; }
+
+.qatar {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -200px -650px;
+  width: 48px;
+  height: 48px; }
+
+.azerbaijan {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -200px 0px;
+  width: 48px;
+  height: 48px; }
+
+.germany {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -450px -250px;
+  width: 48px;
+  height: 48px; }
+
+.bhutan {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -250px -100px;
+  width: 48px;
+  height: 48px; }
+
+.united-arab-emirates {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -100px -750px;
+  width: 48px;
+  height: 48px; }
+
+.maldives {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: 0px 0px;
+  width: 48px;
+  height: 48px; }
+
+.somalia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -50px -700px;
+  width: 48px;
+  height: 48px; }
+
+.saint-vincent {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -700px -50px;
+  width: 48px;
+  height: 48px; }
+
+.antigua-and-barbuda {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -150px -50px;
+  width: 48px;
+  height: 48px; }
+
+.austria {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -150px -150px;
+  width: 48px;
+  height: 48px; }
+
+.uganda {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: 0px -750px;
+  width: 48px;
+  height: 48px; }
+
+.guinea-bissau {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -300px -450px;
+  width: 48px;
+  height: 48px; }
+
+.sudan {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -500px -700px;
+  width: 48px;
+  height: 48px; }
+
+.mayotte {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -600px 0px;
+  width: 48px;
+  height: 48px; }
+
+.latvia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -550px -100px;
+  width: 48px;
+  height: 48px; }
+
+.israel {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: 0px -500px;
+  width: 48px;
+  height: 48px; }
+
+.haiti {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -450px -450px;
+  width: 48px;
+  height: 48px; }
+
+.turkmenistan {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -750px -550px;
+  width: 48px;
+  height: 48px; }
+
+.nicaragua {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -400px -600px;
+  width: 48px;
+  height: 48px; }
+
+.south-africa {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -150px -700px;
+  width: 48px;
+  height: 48px; }
+
+.martinique {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -450px -550px;
+  width: 48px;
+  height: 48px; }
+
+.myanmar {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -600px -500px;
+  width: 48px;
+  height: 48px; }
+
+.portugal {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -100px -650px;
+  width: 48px;
+  height: 48px; }
+
+.mauritius {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -550px -550px;
+  width: 48px;
+  height: 48px; }
+
+.central-african-republic {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -100px -300px;
+  width: 48px;
+  height: 48px; }
+
+.tuvalu {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -750px -650px;
+  width: 48px;
+  height: 48px; }
+
+.spain {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -400px -700px;
+  width: 48px;
+  height: 48px; }
+
+.basque-country {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -50px -200px;
+  width: 48px;
+  height: 48px; }
+
+.south-georgia-and-the-south-sandwich-islands {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -200px -700px;
+  width: 48px;
+  height: 48px; }
+
+.paraguay {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -650px -500px;
+  width: 48px;
+  height: 48px; }
+
+.luxembourg {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -550px -450px;
+  width: 48px;
+  height: 48px; }
+
+.saint-lucia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -650px -650px;
+  width: 48px;
+  height: 48px; }
+
+.bahrain {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -200px -100px;
+  width: 48px;
+  height: 48px; }
+
+.mongolia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -600px -250px;
+  width: 48px;
+  height: 48px; }
+
+.american-samoa {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -100px -50px;
+  width: 48px;
+  height: 48px; }
+
+.turks-and-caicos-islands {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -750px -600px;
+  width: 48px;
+  height: 48px; }
+
+.suriname {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -550px -700px;
+  width: 48px;
+  height: 48px; }
+
+.mali {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -250px -550px;
+  width: 48px;
+  height: 48px; }
+
+.serbia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -700px -400px;
+  width: 48px;
+  height: 48px; }
+
+.bangladesh {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -200px -150px;
+  width: 48px;
+  height: 48px; }
+
+.dominica {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -400px 0px;
+  width: 48px;
+  height: 48px; }
+
+.san-marino {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -700px -150px;
+  width: 48px;
+  height: 48px; }
+
+.france {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -400px -400px;
+  width: 48px;
+  height: 48px; }
+
+.thailand {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -750px -200px;
+  width: 48px;
+  height: 48px; }
+
+.kuwait {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -500px -500px;
+  width: 48px;
+  height: 48px; }
+
+.zimbabwe {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -800px -100px;
+  width: 48px;
+  height: 48px; }
+
+.italy {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -50px -500px;
+  width: 48px;
+  height: 48px; }
+
+.british-antarctic-territory {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -100px -250px;
+  width: 48px;
+  height: 48px; }
+
+.new-zealand {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -350px -600px;
+  width: 48px;
+  height: 48px; }
+
+.brunei {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -200px -250px;
+  width: 48px;
+  height: 48px; }
+
+.liechtenstein {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -550px -350px;
+  width: 48px;
+  height: 48px; }
+
+.falkland-islands {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -200px -400px;
+  width: 48px;
+  height: 48px; }
+
+.jersey {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -200px -500px;
+  width: 48px;
+  height: 48px; }
+
+.chad {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -150px -300px;
+  width: 48px;
+  height: 48px; }
+
+.eritrea {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: 0px -400px;
+  width: 48px;
+  height: 48px; }
+
+.palau {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -650px -300px;
+  width: 48px;
+  height: 48px; }
+
+.us-virgin-islands {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -750px -700px;
+  width: 48px;
+  height: 48px; }
+
+.denmark {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -300px -350px;
+  width: 48px;
+  height: 48px; }
+
+.western-sahara {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -750px -750px;
+  width: 48px;
+  height: 48px; }
+
+.belarus {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -100px -200px;
+  width: 48px;
+  height: 48px; }
+
+.barbados {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: 0px -200px;
+  width: 48px;
+  height: 48px; }
+
+.philippines {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -650px -600px;
+  width: 48px;
+  height: 48px; }
+
+.albania {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -50px -50px;
+  width: 48px;
+  height: 48px; }
+
+.faroes {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -250px -400px;
+  width: 48px;
+  height: 48px; }
+
+.singapore {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -700px -550px;
+  width: 48px;
+  height: 48px; }
+
+.lebanon {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -550px -150px;
+  width: 48px;
+  height: 48px; }
+
+.india {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -500px -200px;
+  width: 48px;
+  height: 48px; }
+
+.peru {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -650px -550px;
+  width: 48px;
+  height: 48px; }
+
+.ethiopia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -100px -400px;
+  width: 48px;
+  height: 48px; }
+
+.netherlands {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -250px -600px;
+  width: 48px;
+  height: 48px; }
+
+.georgia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -450px -200px;
+  width: 48px;
+  height: 48px; }
+
+.bahamas {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -200px -50px;
+  width: 48px;
+  height: 48px; }
+
+.swaziland {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -600px -700px;
+  width: 48px;
+  height: 48px; }
+
+.palestine {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -650px -350px;
+  width: 48px;
+  height: 48px; }
+
+.iraq {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -500px -350px;
+  width: 48px;
+  height: 48px; }
+
+.norfolk-island {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -600px -600px;
+  width: 48px;
+  height: 48px; }
+
+.sri-lanka {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -450px -700px;
+  width: 48px;
+  height: 48px; }
+
+.abkhazia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -50px 0px;
+  width: 48px;
+  height: 48px; }
+
+.vanuatu {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -450px -750px;
+  width: 48px;
+  height: 48px; }
+
+.croatia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: 0px -350px;
+  width: 48px;
+  height: 48px; }
+
+.malawi {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -100px -550px;
+  width: 48px;
+  height: 48px; }
+
+.vatican-city {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -500px -750px;
+  width: 48px;
+  height: 48px; }
+
+.jordan {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -250px -500px;
+  width: 48px;
+  height: 48px; }
+
+.fiji {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -300px -400px;
+  width: 48px;
+  height: 48px; }
+
+.egypt {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -400px -200px;
+  width: 48px;
+  height: 48px; }
+
+.niger {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -450px -600px;
+  width: 48px;
+  height: 48px; }
+
+.wales {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -650px -750px;
+  width: 48px;
+  height: 48px; }
+
+.japan {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -150px -500px;
+  width: 48px;
+  height: 48px; }
+
+.vietnam {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -600px -750px;
+  width: 48px;
+  height: 48px; }
+
+.red-cross {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -250px -650px;
+  width: 48px;
+  height: 48px; }
+
+.sao-tome-and-principe {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -700px -200px;
+  width: 48px;
+  height: 48px; }
+
+.malta {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -300px -550px;
+  width: 48px;
+  height: 48px; }
+
+.uruguay {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -350px -750px;
+  width: 48px;
+  height: 48px; }
+
+.aland {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: 0px -50px;
+  width: 48px;
+  height: 48px; }
+
+.ireland {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -500px -400px;
+  width: 48px;
+  height: 48px; }
+
+.cote-divoire {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -350px -300px;
+  width: 48px;
+  height: 48px; }
+
+.uzbekistan {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -400px -750px;
+  width: 48px;
+  height: 48px; }
+
+.finland {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -350px -400px;
+  width: 48px;
+  height: 48px; }
+
+.northern-mariana-islands {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -650px -50px;
+  width: 48px;
+  height: 48px; }
+
+.european-union {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -150px -400px;
+  width: 48px;
+  height: 48px; }
+
+.romania {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -350px -650px;
+  width: 48px;
+  height: 48px; }
+
+.lithuania {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -550px -400px;
+  width: 48px;
+  height: 48px; }
+
+.slovenia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -700px -650px;
+  width: 48px;
+  height: 48px; }
+
+.slovakia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -700px -600px;
+  width: 48px;
+  height: 48px; }
+
+.nauru {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -100px -600px;
+  width: 48px;
+  height: 48px; }
+
+.indonesia {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -500px -250px;
+  width: 48px;
+  height: 48px; }
+
+.chile {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -200px -300px;
+  width: 48px;
+  height: 48px; }
+
+.mexico {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -600px -50px;
+  width: 48px;
+  height: 48px; }
+
+.el-salvador {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -400px -250px;
+  width: 48px;
+  height: 48px; }
+
+.norway {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -650px -100px;
+  width: 48px;
+  height: 48px; }
+
+.botswana {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: 0px -250px;
+  width: 48px;
+  height: 48px; }
+
+.morocco {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -600px -400px;
+  width: 48px;
+  height: 48px; }
+
+.united-states {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -250px -750px;
+  width: 48px;
+  height: 48px; }
+
+.belize {
+  background-image: url(/themes/custom/shipyard/images/sprites/build/sprites.png);
+  background-position: -200px -200px;
+  width: 48px;
+  height: 48px; }
+
+.sidebar-menu {
+  clear: both; }
+  .sidebar-menu .menu-item:after {
+    content: "";
+    display: block;
+    clear: both; }
+  .sidebar-menu.closed {
+    left: -180px;
+    opacity: 0;
+    -webkit-transition: left .2s ease-in;
+    transition: left .2s ease-in; }
+  .sidebar-menu.open {
+    z-index: 9;
+    left: 0;
+    width: 100%;
+    opacity: 1;
+    background: #f4f4f4;
+    -webkit-transition: left .2s ease-out;
+    transition: left .2s ease-out; }
+
+/* sidebar-menuicon */
+header .menu-icon {
+  cursor: pointer;
+  padding: 22px 20px;
+  float: left;
+  position: relative;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.15); }
+
+header .menu-icon .navicon {
+  background: #148c8c;
+  display: block;
+  height: 2px;
+  position: relative;
+  -webkit-transition: background .2s ease-out;
+  transition: background .2s ease-out;
+  width: 18px; }
+
+header .menu-icon .navicon:before,
+header .menu-icon .navicon:after {
+  background: #148c8c;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  -webkit-transition: all .2s ease-out;
+  transition: all .2s ease-out;
+  width: 100%; }
+
+.menu-icon .navicon:before {
+  top: 5px; }
+
+.menu-icon .navicon:after {
+  top: -5px; }
+
+/* sidebar-menubtn */
+header .menu-icon {
+  display: none; }
+  @media (max-width: 960px) {
+    header .menu-icon {
+      display: block;
+      margin-right: 20px; } }
+  @media (max-width: 600px) {
+    header .menu-icon {
+      margin-right: 10px; } }
+  @media (max-width: 360px) {
+    header .menu-icon {
+      padding: 22px 15px; } }
+
+header .menu-btn {
+  display: none; }
+
+header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent; }
+
+header .menu-btn:checked ~ .menu-icon .navicon:before {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg); }
+
+header .menu-btn:checked ~ .menu-icon .navicon:after {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg); }
+
+header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0; }
+
+#calendar-send #close {
+  background: #ff5252; }
+
+#calendar-send .fc-state-default {
+  line-height: 0; }
+
+#calendar-send .date-type {
+  line-height: 38px;
+  font-size: 18px; }
+  #calendar-send .date-type span {
+    text-decoration: underline;
+    text-transform: capitalize; }
+
+#calendar-send .high-dens {
+  background: #ff5252; }
+
+#calendar-send label {
+  font-weight: 500; }
+
+.help-text {
+  display: block;
+  font-size: 14px;
+  font-size: 0.875rem;
+  margin: 15px 0;
+  padding-bottom: 10px; }
+
+.request-submit-btn {
+  background: #3aa531;
+  padding: 8px 60px;
+  border-radius: 30px;
+  border: none;
+  color: #fff;
+  display: block;
+  margin: 0 auto;
+  margin-top: 30px;
+  text-align: center; }
+  .request-submit-btn:hover {
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); }
+
+.lock {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 12; }
+
+.user-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  max-width: 1000px;
+  width: 100%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background: white;
+  padding: 60px; }
+  .user-popup h2 {
+    max-width: 100% !important;
+    margin-bottom: 20px !important;
+    text-align: center;
+    border-bottom: none !important;
+    padding-bottom: 10px !important; }
+    .user-popup h2:after {
+      content: "";
+      display: block;
+      max-width: 100px;
+      height: 2px;
+      width: 100%;
+      background: #148c8c;
+      margin: 0 auto;
+      margin-top: 20px; }
+  .user-popup .subheader {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto; }
+  .user-popup .popup-actions-wrapper {
+    display: block;
+    text-align: center; }
+  .user-popup .popup-misc {
+    text-align: center;
+    border-top: 1px solid #f4f4f4;
+    padding-top: 20px; }
+  .user-popup button {
+    display: inline-block;
+    margin-right: 10px;
+    background: white;
+    border: 1px solid #e87915;
+    padding: 8px 50px;
+    border-radius: 30px;
+    color: #e87915;
+    min-width: 100px;
+    text-align: center;
+    padding: 6px 45px;
+    margin: 27px 5px; }
+    .user-popup button:hover {
+      cursor: pointer;
+      background: #e87915;
+      color: #fff; }
+    @media (max-width: 550px) {
+      .user-popup button {
+        display: block;
+        width: 100%; } }
+  .user-popup .bold,
+  .user-popup .popup-misc-explain {
+    font-weight: 500; }
+
+body {
+  background: #fff; }
+
+.layout-container {
+  height: 100vh; }
+
+.path-user #general-container {
+  display: block !important; }
+
+.path-user main {
+  float: none;
+  padding: 0 30px;
+  width: 100%; }
+
+.path-user .user-pass-reset {
+  padding-top: 40px; }
+
+.path-user .user-login-form,
+.path-user .user-pass,
+.path-user .user-pass-reset {
+  text-align: center;
+  max-width: 450px;
+  margin: 0 auto; }
+  .path-user .user-login-form label,
+  .path-user .user-pass label,
+  .path-user .user-pass-reset label {
+    display: block;
+    padding-bottom: 5px; }
+  .path-user .user-login-form input,
+  .path-user .user-pass input,
+  .path-user .user-pass-reset input {
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    background: #fff; }
+  .path-user .user-login-form input[type="submit"],
+  .path-user .user-pass input[type="submit"],
+  .path-user .user-pass-reset input[type="submit"] {
+    background: #e87915;
+    padding: 8px 60px;
+    border-radius: 30px;
+    color: #fff;
+    border: none;
+    width: auto; }
+    .path-user .user-login-form input[type="submit"]:hover,
+    .path-user .user-pass input[type="submit"]:hover,
+    .path-user .user-pass-reset input[type="submit"]:hover {
+      -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); }
+  .path-user .user-login-form .form-actions,
+  .path-user .user-pass .form-actions,
+  .path-user .user-pass-reset .form-actions {
+    margin-top: 30px; }
+  .path-user .user-login-form .form-item,
+  .path-user .user-login-form .form-actions,
+  .path-user .user-pass .form-item,
+  .path-user .user-pass .form-actions,
+  .path-user .user-pass-reset .form-item,
+  .path-user .user-pass-reset .form-actions {
+    margin: 40px 0 0; }
+  .path-user .user-login-form .description,
+  .path-user .user-login-form p,
+  .path-user .user-pass .description,
+  .path-user .user-pass p,
+  .path-user .user-pass-reset .description,
+  .path-user .user-pass-reset p {
+    color: #999;
+    font-size: 14px;
+    font-size: 0.875rem; }
+  .path-user .user-login-form .request-password-link,
+  .path-user .user-pass .request-password-link,
+  .path-user .user-pass-reset .request-password-link {
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    margin-top: 50px; }
+    .path-user .user-login-form .request-password-link a,
+    .path-user .user-pass .request-password-link a,
+    .path-user .user-pass-reset .request-password-link a {
+      float: right;
+      color: #0d5959;
+      font-size: 14px;
+      font-size: 0.875rem; }
+  .path-user .user-login-form .reset-text,
+  .path-user .user-pass .reset-text,
+  .path-user .user-pass-reset .reset-text {
+    color: #999;
+    font-size: 14px;
+    font-size: 0.875rem;
+    float: left; }
+
+.path-user .user-login-form {
+  margin-top: 250px; }
+
+.missing {
+  border: 1px solid #ff1313 !important;
+  position: relative;
+  color: #ff1313; }
+
+.role-bsg_operator.path-owners #edit-user {
+  text-indent: -99999px; }
+
+.role-external_user #edit-user,
+.role-external_user .edit {
+  text-indent: -99999px; }
+
+.file a {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  color: #0d5959; }
+  .file a:visited {
+    color: #0d5959; }
+  .file a:hover {
+    color: #0d5959;
+    cursor: pointer; }
+  .file a:active {
+    color: #0d5959; }
+
+.yacht-gallery img {
+  width: 120px;
+  height: 120px; }
+
+.has-paid,
+.has-not-paid {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  margin: 0 auto; }
+
+.has-paid {
+  background: green; }
+
+.has-not-paid {
+  background: red; }
+
+.admin-paid {
+  margin-right: 10px; }
+
+.remain-ashore {
+  padding: 30px; }
+  .remain-ashore .active {
+    background: #e87915;
+    color: #fff; }
+
+#block-views-block-yacht-block-2 {
+  margin-top: 50px; }
+  #block-views-block-yacht-block-2 h4 {
+    display: block;
+    font-family: "Alegreya";
+    font-size: 26px;
+    max-width: 260px;
+    border-bottom: 2px solid #148c8c;
+    margin-bottom: 20px; }
+  #block-views-block-yacht-block-2 .views-field-title a {
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    color: #000; }
+    #block-views-block-yacht-block-2 .views-field-title a:visited {
+      color: #000; }
+    #block-views-block-yacht-block-2 .views-field-title a:hover {
+      color: #e87915;
+      cursor: pointer; }
+    #block-views-block-yacht-block-2 .views-field-title a:active {
+      color: #000; }
+
+/*# sourceMappingURL=styles.css.map */

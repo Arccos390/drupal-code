@@ -1,0 +1,14 @@
+{
+  "name": "drupal/eshipyard_create_actions",
+  "type": "drupal-module",
+  "description": "Custom Module to provide an endpoint for Posting Yacht actions",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/eshipyard_create_actions",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/eshipyard_create_actions",
+    "source": "http://cgit.drupalcode.org/eshipyard_create_actions"
+  },
+  "require": { }
+}

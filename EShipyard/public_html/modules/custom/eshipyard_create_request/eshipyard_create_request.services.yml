@@ -1,0 +1,6 @@
+services:
+  eshipyard_create_request.event_subscriber:
+    class: Drupal\eshipyard_create_request\EventSubscriber\EshipyardCreateRequestSubscriber
+    arguments: ['@messenger']
+    tags:
+      - { name: event_subscriber }

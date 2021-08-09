@@ -1,0 +1,10 @@
+entity.yacht_action.settings:
+  title: Yacht action
+  description: Configure a Yacht action entity type
+  route_name:  entity.yacht_action.settings
+  parent: system.admin_structure
+entity.yacht_action.collection:
+  title: Yacht actions
+  description: List of yacht actions
+  route_name: entity.yacht_action.collection
+  parent: system.admin_content

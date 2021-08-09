@@ -1,0 +1,7 @@
+eshipyard_email.form:
+  path: '/admin/notification-message'
+  defaults:
+    _title: 'Notification Message'
+    _form: '\Drupal\eshipyard_email\Form\NotificationForm'
+  requirements:
+    _permission: 'notification_message_access'

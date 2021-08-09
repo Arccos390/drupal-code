@@ -1,0 +1,151 @@
+// This easy fix sets the side menu's height automatically depending on 
+// whether the admin navbars are open or not. Not that each admin bar has
+// different states and we must take each of these into account.
+
+.sidebar-menu {
+	height: calc(100vh - 45px);
+}
+
+.toolbar-tray-open {
+	.sidebar-menu {
+		height: calc(100vh - 145px);
+	}
+}
+
+.toolbar-fixed {
+	.sidebar-menu {
+		height: calc(100vh - 84px);
+	}
+	&.toolbar-tray-open {
+		.sidebar-menu {
+			height: calc(100vh - 145px);
+		}
+	}
+}
+
+.toolbar-oriented .toolbar-bar {
+	@include breakpoint(960px) {
+		position: fixed;
+	}
+}
+
+
+// Sidebar general styling
+.sidebar-menu {
+	position: fixed;
+	background: $opaque-petrol;
+	width: 165px;
+	padding: 50px 20px 35px 20px;
+	bottom: 0;
+
+
+	@include breakpoint(960px) {
+		// width: 100%;
+	 //    height: 100%;
+	    // background: white;
+	    // position: absolute;
+	    // top: 80px;
+	    z-index: 1;
+	}
+
+	
+	.menu {
+		margin: 0;
+		@include clearfix;
+	}
+
+	.menu-item {
+		@include links($black,$black,$black,$black);
+		a {
+			font-weight: $light;
+			font-size: $base;
+			text-align: center;
+			border-bottom: 1px solid $white;
+			padding: 7vh 10% 21px 10%;
+			padding: 20px 10px;
+			line-height: 21px;
+			display: block;
+			
+			@media screen and (max-height: 900px) {
+				padding: 20px 0;
+				@include clearfix;
+			}
+
+			@include breakpoint(960px) {
+				border-bottom: 1px solid rgba($black,0.15);
+				@include clearfix;
+			}
+		}
+
+		&:nth-child(1) {
+			padding-top: 0;
+		}
+	}
+}
+
+.sidebar-menu-wrapper {
+	position: relative;
+	height: 100%;
+}
+
+
+.sidebar-menu-inner {
+	height: 100%;
+	position: relative;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	font-size: $small;
+	text-align: center;
+}
+
+
+
+// Assign a menu icon for each item.
+//$items: ('', '', '', 'm-areas');
+$map: (
+  '#m-home': 'home.svg',
+  '#m-cradle': 'cradle.svg',
+  '#m-yachts': 'yacht.svg',
+  '#m-areas': 'area.svg',
+  '#m-owners': 'owner.svg'
+);
+
+@each $element, $icon in $map {
+  #{$element} {
+  	&:before {
+  		content: "";
+  		display: inline-block;
+  		background: url(../images/custom-icons/#{$icon});
+	    height: 50px;
+	    height: 5vh;
+	    background-size: contain;
+	    width: 60px;
+	    background-repeat: no-repeat;	 
+	    background-position: center;
+
+	    @media screen and (max-height: 900px) {
+  			height: 25px;
+  			width: 35px;
+  			float: left;
+  			margin-right: 10px;
+		}		
+		@include breakpoint(960px) {
+		    display: inline-block;
+    		vertical-align: middle;
+    		float: none;
+		}
+  	} 
+  	// a tag
+	@media screen and (max-height: 900px) {
+		float: right;
+		width: 100%;
+	}		
+  }
+}
+
+
+
+

@@ -1,0 +1,4 @@
+administer eshipyard_create_request configuration:
+  title: 'Administer eshipyard_create_request configuration'
+  description: 'Optional description.'
+  restrict access: true

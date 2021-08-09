@@ -1,0 +1,4 @@
+name = A Place In The Sun - Feed implementation
+description = A custom module responsible for creating proper JSON data and uploading them to A Place In The Sun.
+package = Custom
+core = 7.x

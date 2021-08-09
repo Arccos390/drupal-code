@@ -1,0 +1,329 @@
+<?php
+
+/**
+ * @file
+ * The main module file for aplaceinthesun.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function aplaceinthesun_menu() {
+  $items['aplaceinthesun.xml'] = [
+    'page callback' => 'aplaceinthesun_generate_feed',
+    'access callback' => TRUE,
+  ];
+
+  return $items;
+}
+
+function aplaceinthesun_generate_feed() {
+  // Query all of the nids of a particular content type.
+  $nids_l = db_select('node', 'n')
+    ->fields('n', ['nid'])
+    ->condition('type', 'land', '=')
+    ->condition('status', '1', '=')
+    ->execute()
+    ->fetchCol();
+  $nids_r = db_select('node', 'n')
+    ->fields('n', ['nid'])
+    ->condition('type', 'residential', '=')
+    ->condition('status', '1', '=')
+    ->execute()
+    ->fetchCol();
+
+  // Get all of the article nodes.
+  $nodes = array_merge(node_load_multiple($nids_l), node_load_multiple($nids_r));
+  error_reporting(E_ALL & ~E_NOTICE);
+  header('Content-type: text/xml');
+  $xml_feed = '<?xml version="1.0" encoding="utf-8"?>';
+  $xml_feed .= '<Properties>';
+  foreach ($nodes as $node) {
+    $is_aplaceinthesun_selected = FALSE;
+    if (!empty($node->field_feed_platforms)) {
+      foreach ($node->field_feed_platforms[LANGUAGE_NONE] as $key => $value) {
+        if ($value['value'] === 'aplaceinthesun') {
+          $is_aplaceinthesun_selected = TRUE;
+          break;
+        }
+      }
+    }
+    //If available
+    if ($node->field_property_status[LANGUAGE_NONE][0]['value'] == 0 && $is_aplaceinthesun_selected === TRUE) {
+      $xml_feed .= "<Property>";
+      $xml_feed .= "<UniquePropertyID>{$node->field_reference_number[LANGUAGE_NONE][0]['value']}</UniquePropertyID>";
+      $update_date = date('Y-m-d H:i:s', $node->changed);
+      $xml_feed .= "<LastUpdateDate>{$update_date}</LastUpdateDate>";
+      $xml_feed .= "<Country>Greece</Country>";
+      $all_parent_location_node = taxonomy_get_parents($node->field_property_location[LANGUAGE_NONE][0]['tid']);
+      $location_node = taxonomy_term_load($node->field_property_location[LANGUAGE_NONE][0]['tid']);
+
+      $all_parent_location_node = array_reverse($all_parent_location_node);
+      $parent_location_node = array_pop($all_parent_location_node);
+      $xml_feed .= "<Region><![CDATA[{$parent_location_node->name}]]></Region>";
+      if (!empty($location_node->name)) {
+        $xml_feed .= "<Subregion><![CDATA[{$location_node->name}]]></Subregion>";
+      }
+      $town = explode(',', $node->field_subtitle[LANGUAGE_NONE][0]['value']);
+      $xml_feed .= "<Town><![CDATA[{$town[0]}]]></Town>";
+      $xml_feed .= "<GeoLocation>";
+      $xml_feed .= "<Latitude>{$node->field_property_map_geo[LANGUAGE_NONE][0]['lat']}</Latitude>";
+      $xml_feed .= "<Longitude>{$node->field_property_map_geo[LANGUAGE_NONE][0]['lon']}</Longitude>";
+      $xml_feed .= "</GeoLocation>";
+      $xml_feed .= "<SalePrice>{$node->field_price[LANGUAGE_NONE][0]['value']}</SalePrice>";
+      $xml_feed .= "<Currency>EUR</Currency>";
+      if ($node->type === 'residential') {
+        $property_type = aplaceinthesun_get_property_id($node->type, $node->field_property_type[LANGUAGE_NONE][0]['value']);
+      }
+      else {
+        $property_type = aplaceinthesun_get_property_id($node->type, $node->field_property_type_land[LANGUAGE_NONE][0]['value']);
+      }
+      $xml_feed .= "<PropertyType><![CDATA[{$property_type}]]></PropertyType>";
+
+      $num_of_bedrooms = 0;
+      if (isset($node->field_bedrooms[LANGUAGE_NONE][0]['value'])) {
+        $num_of_bedrooms = $node->field_bedrooms[LANGUAGE_NONE][0]['value'];
+      }
+      if ($num_of_bedrooms > 0) {
+        $xml_feed .= "<NumBedrooms>{$num_of_bedrooms}</NumBedrooms>";
+      }
+
+      $num_of_bathrooms = 0;
+      if (isset($node->field_bathrooms[LANGUAGE_NONE][0]['value'])) {
+        $num_of_bathrooms = $node->field_bathrooms[LANGUAGE_NONE][0]['value'];
+      }
+      if ($num_of_bathrooms > 0) {
+        $xml_feed .= "<NumBathrooms>{$num_of_bathrooms}</NumBathrooms>";
+      }
+      $xml_feed .= "<PropertyName><![CDATA[{$node->title}]]></PropertyName>";
+      $further_information = str_replace('&nbsp;', '', strip_tags($node->field_further_information[LANGUAGE_NONE][0]['value']));
+      $xml_feed .= "<Introduction><![CDATA[{$further_information}]]></Introduction>";
+      $description = '';
+      if (!empty($node->body['und'][0]['value'])) {
+        $description .= str_replace('&nbsp;', '', strip_tags($node->body['und'][0]['value']));
+      }
+      if (!empty($node->field_location['und'][0]['value'])) {
+        $description .= str_replace('&nbsp;', '', strip_tags($node->field_location['und'][0]['value']));
+      }
+
+      $xml_feed .= "<Description><![CDATA[{$description}]]></Description>";
+      $xml_feed .= "<Features>";
+      $i = 0;
+      if (!empty($node->field_key_points)) {
+        foreach ($node->field_key_points[LANGUAGE_NONE] as $key => $element) {
+          $xml_feed .= "<Feature><![CDATA[{$element['value']}]]></Feature>";
+          $i++;
+          if ($i > 9) {
+            break;
+          }
+        }
+      }
+      $xml_feed .= '</Features>';
+
+      $xml_feed .= '<Photos>';
+      foreach ($node->field_images[LANGUAGE_NONE] as $key => $element) {
+        $file = file_load($element['fid']);
+        $uri = $file->uri;
+        $xml_feed .= '<Photo>';
+        $xml_feed .= '<PhotoURL>' . file_create_url($uri) . '</PhotoURL>';
+        $xml_feed .= '<PhotoDesc><![CDATA[' . $element['alt'] . ']]></PhotoDesc>';
+        $xml_feed .= '</Photo>';
+      }
+      $xml_feed .= '</Photos>';
+
+      $xml_feed .= '</Property>';
+    }
+  }
+  $xml_feed .= '</Properties>';
+  print $xml_feed;
+  drupal_exit();
+}
+
+/**
+ * Maps Drupal's property values to the ones expected by A Place In The Sun API.
+ *
+ * @param string $default_type
+ *   The content type to check.
+ * @param string $type
+ *   The Drupal field value.
+ *
+ * @return int
+ *   The value expected by A Place In The Sun.
+ */
+function aplaceinthesun_get_property_id($default_type, $type = NULL) {
+  /* From /admin/structure/types/manage/residential/fields/field_property_type/field-settings
+   *
+   * AF|Arable Farm
+   * BP|Building Plot
+   * B|Bungalow
+   * Cast|Castle/Chateaux
+   * Condo|Condonminium
+   * DF|Dairy Farm
+   * D|Duplex
+   * Est|Estate
+   * EQ|Equestrian
+   * ECondo|Executive Condonminium
+   * F|Farm
+   * HDB|HDB Apartment
+   * Apt|Flat/Apartment
+   * FOC|Flat Outside The City
+   * HRB|High Rise Building
+   * H|House
+   * LF|Livestock Farm
+   * M|Mews
+   * MRB|Middle Rise Building
+   * ND|New Development
+   * Pent|Penthouse
+   * RFE|Residential Farm/Estate
+   * SApt|Serviced Apartment
+   * S|Sporting
+   * Stu|Studio
+   * TUA|Temporary Use Apartments
+   * TH|Townhouse
+   * T|Triplex
+   * V|Villa
+   * W|Woodland
+   */
+
+  //A Place in the Sun valid values
+  /*
+   * Apartment
+   * Bar
+   * Barn
+   * Bungalow
+   * Chateaux
+   * Commercial
+   * Condo
+   * Cortijo
+   * Cottage
+   * Country House
+   * Farmhouse
+   * Finca
+   * Flat
+   * Hotel
+   * House
+   * Key Ready
+   * Land
+   * New Homes
+   * Penthouse
+   * Plot
+   * Property
+   * Quad
+   * Restaurant
+   * Studio
+   * Townhouse
+   * Villa
+   * Vineyard
+   */
+
+  $property_id = 'Apartment';
+  if ($default_type === 'residential') {
+    $property_id = 'Apartment';
+    if ($type === 'AF') {
+      $property_id = 'Farmhouse';
+    }
+    elseif ($type === 'BP') {
+      $property_id = 'Plot';
+    }
+    elseif ($type === 'B') {
+      $property_id = 'Bungalow';
+    }
+    elseif ($type === 'Cast') {
+      $property_id = 'Chateaux';
+    }
+    elseif ($type === 'Condo') {
+      $property_id = 'Apartment';
+    }
+    elseif ($type === 'DF') {
+      $property_id = 'Farmhouse';
+    }
+    elseif ($type === 'D') {
+      $property_id = 'Apartment';
+    }
+    elseif ($type === 'Est') {
+      $property_id = 'Apartment';
+    }
+    elseif ($type === 'EQ') {
+      $property_id = 'Apartment';
+    }
+    elseif ($type === 'ECondo') {
+      $property_id = 'Apartment';
+    }
+    elseif ($type === 'F') {
+      $property_id = 'Farmhouse';
+    }
+    elseif ($type === 'HDB') {
+      $property_id = 'Apartment';
+    }
+    elseif ($type === 'Apt') {
+      $property_id = 'Apartment';
+    }
+    elseif ($type === 'FOC') {
+      $property_id = 'Flat';
+    }
+    elseif ($type === 'HRB') {
+      $property_id = 'Apartment';
+    }
+    elseif ($type === 'H') {
+      $property_id = 'House';
+    }
+    elseif ($type === 'LF') {
+      $property_id = 'Farmhouse';
+    }
+    elseif ($type === 'M') {
+      $property_id = 'Apartment';
+    }
+    elseif ($type === 'MRB') {
+      $property_id = 'Apartment';
+    }
+    elseif ($type === 'ND') {
+      $property_id = 'New Homes';
+    }
+    elseif ($type === 'Pent') {
+      $property_id = 'Penthouse';
+    }
+    elseif ($type === 'RFE') {
+      $property_id = 'Farmhouse';
+    }
+    elseif ($type === 'SApt') {
+      $property_id = 'Apartment';
+    }
+    elseif ($type === 'S') {
+      $property_id = 'Apartment';
+    }
+    elseif ($type === 'Stu') {
+      $property_id = 'Studio';
+    }
+    elseif ($type === 'TUA') {
+      $property_id = 'Apartment';
+    }
+    elseif ($type === 'TH') {
+      $property_id = 'House';
+    }
+    elseif ($type === 'T') {
+      $property_id = 'House';
+    }
+    elseif ($type === 'V') {
+      $property_id = 'Villa';
+    }
+    elseif ($type === 'W') {
+      $property_id = 'Land';
+    }
+  }
+  elseif ($default_type === 'land') {
+    $property_id = 'Land';
+    if ($type === 'commercial') {
+      $property_id = 'Commercial';
+    }
+    elseif ($type === 'tourist') {
+      $property_id = 'Land';
+    }
+    elseif ($type === 'industrial') {
+      $property_id = 'Land';
+    }
+    elseif ($type === 'residential') {
+      $property_id = 'Land';
+    }
+  }
+  return $property_id;
+}

@@ -1,0 +1,5 @@
+name: E-Shipyard - Custom Changes
+type: module
+description: 'Provides some custom functionality.'
+package: E-Shipyard
+core: 8.x

@@ -1,0 +1,8 @@
+name: E-Shipyard - Yacht action
+type: module
+description: 'Provides a yacht action entity.'
+package: E-Shipyard
+core: 8.x
+configure: entity.yacht_action.settings
+dependencies:
+  - drupal:datetime

@@ -1,0 +1,9 @@
+name: Table Files Cron Modules
+description: This custom module allows different cron jobs for module tablefiles.
+package: Custom
+type: module
+core: 8.x
+dependencies:
+  - ticket:ticket
+  - ticketapp:ticketapp
+  - tablefiles:tablefiles

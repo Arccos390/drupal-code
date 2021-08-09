@@ -1,0 +1,197 @@
+<?php
+
+// @todo Turn this into a function or constant instead and use it.
+define('PRODUCT_IMPORT_FILE_NAME', 'product_import_' . date('d-m-Y'));
+
+// Definitions of the column names. Change here. Changed everywhere.
+define('DIP_COLUMN_NID', 'Nid');
+define('DIP_COLUMN_TITLE', 'Τίτλος');
+define('DIP_COLUMN_DISPLAY_FRONTPAGE', 'Προβολή στην Αρχική Σελίδα');
+define('DIP_COLUMN_SKROUTZ', 'Skroutz Προώθηση');
+define('DIP_COLUMN_CATEGORY_1', 'Κατηγορία 1');
+define('DIP_COLUMN_CATEGORY_2', 'Κατηγορία 2');
+define('DIP_COLUMN_CATEGORY_3', 'Κατηγορία 3');
+define('DIP_COLUMN_SPECIAL_CATEGORY', 'Ειδική Κατηγορία');
+define('DIP_COLUMN_MANUFACTURER', 'Κατασκευαστής');
+define('DIP_COLUMN_GUARANTEE', 'Εγγύηση');
+define('DIP_COLUMN_PROVIDER', 'Προμηθευτής');
+define('DIP_COLUMN_CLIENT_MESSAGE', 'Μήνυμα για Επισκέπτη');
+define('DIP_COLUMN_VIDEO', 'Video');
+define('DIP_COLUMN_PRODUCT_SKU', 'Κωδικός');
+define('DIP_COLUMN_MPN', 'MPN');
+define('DIP_COLUMN_PRODUCT_TITLE', 'Τίτλος Προϊόντος');
+define('DIP_COLUMN_PRICE', 'Τιμή');
+define('DIP_COLUMN_INITIAL_PRICE', 'Αρχική Τιμή');
+define('DIP_COLUMN_OUT_OF_STOCK_NOTIFICATION', 'Ειδοποίηση Out of Stock');
+define('DIP_COLUMN_STOCK', 'Stock');
+define('DIP_COLUMN_NOT_IMMEDIATE_DELIVERY', 'Μη Άμεσα Διαθέσιμο');
+define('DIP_COLUMN_AVAILABILITY', 'Διαθεσιμότητα');
+define('DIP_COLUMN_SHIPPING', 'Μεταφορικά');
+define('DIP_COLUMN_LARGER_THAN_1_5M', 'Μεγαλύτερο από 1,5m');
+define('DIP_COLUMN_WEIGHT', 'Βάρος');
+define('DIP_COLUMN_CASH_ON_DELIVERY', 'Αντικαταβολή');
+define('DIP_COLUMN_PUBLISHED', 'Δημοσιευμένο');
+define('DIP_COLUMN_WEIGHT_FOR_NODE', 'Weight');
+define('DIP_COLUMN_SEE_MORE', 'Δείτε επίσης');
+define('DIP_COLUMN_STATUS', 'Κατάσταση');
+
+/**
+ * Implements hook_permission().
+ */
+function diamantis_import_product_permission() {
+  return [
+    'use diamantis import' => [
+      'title' => t('Administer product import and export'),
+      'description' => t('Perform administration tasks for product import and export.'),
+    ],
+  ];
+}
+
+/**
+ * Implements hook_menu().
+ */
+function diamantis_import_product_menu() {
+  $items['admin/erp/import-product-csv'] = [
+    'title' => 'Import Product CSV',
+    'description' => 'Multiple product update by a csv file.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['diamantis_import_product_form'],
+    'access arguments' => ['use diamantis import'],
+  ];
+  return $items;
+}
+
+/**
+ * The form used for the import.
+ */
+function diamantis_import_product_form($form, &$form_state) {
+  $form['csv_upload'] = [
+    '#type' => 'file',
+    '#title' => t('Choose a .csv or .txt file'),
+    '#weight' => 1,
+  ];
+
+  $form['submit_button'] = [
+    '#type' => 'submit',
+    '#value' => t('Upload'),
+    '#submit' => [
+      'diamantis_import_product_form_submit',
+    ],
+    '#weight' => 2,
+  ];
+
+  return $form;
+}
+
+/**
+ * Validation callback.
+ */
+function diamantis_import_product_form_validate($form, &$form_state) {
+  if (isset($_FILES['files']['name'])) {
+    // Saved in temporary drupal directory.
+    $file = file_save_upload('csv_upload', [
+      // Validate extensions.
+      'file_validate_extensions' => ['csv txt'],
+    ], 'temporary://', FILE_EXISTS_REPLACE);
+
+    // If the file passed validation:
+    if ($file !== FALSE && isset($file)) {
+      $form_state['values']['csv_upload'] = $file;
+      $form_state['storage']['csv_upload'] = $file;
+    }
+    else {
+      form_set_error('import_file', t('No file was uploaded.'));
+    }
+  }
+}
+
+/**
+ * Submit callback.
+ */
+function diamantis_import_product_form_submit($form, &$form_state) {
+  $columns = [];
+  if (isset($form_state['values']['csv_upload'])) {
+    $file = $form_state['storage']['csv_upload'];
+    $row = 0;
+    if (($handle = fopen($file->uri, 'rb')) !== FALSE) {
+      $columns[$row] = fgetcsv($handle, 1000);
+      while ($columns[$row] !== FALSE) {
+        $row++;
+        $columns[$row] = fgetcsv($handle, 1000);
+      }
+      $file_list[] = str_replace('temporary://', '', $file->destination);
+      fclose($handle);
+    }
+  }
+
+  $batch = [
+    'title' => t('Saving Product ...'),
+    'operations' => [],
+    'init_message' => t('Commencing'),
+    'progress_message' => t('Processed @current out of @total.'),
+    'error_message' => t('An error occurred during processing'),
+    'finished' => 'diamantis_import_product_finished',
+    'file' => drupal_get_path('module', 'diamantis_import_product') . '/diamantis_import_product.batch.inc',
+  ];
+
+  $column_name_key = [];
+  if (isset($columns[0])) {
+    foreach ($columns[0] as $column_name) {
+      $column_name_key[] = $column_name;
+    }
+  }
+
+   // Make sure we don't get problems with the Nid string.
+  if (isset($column_name_key[0]) && stripos($column_name_key[0], 'Nid') !== FALSE) {
+    $column_name_key[0] = 'Nid';
+  }
+
+  $err_message = '';
+  if (column_map_view_check($column_name_key)) {
+    foreach ($columns as $key => $column) {
+      if ($key === 0) {
+        continue;
+      }
+
+      if ($column === FALSE) {
+        break;
+      }
+
+      $batch['operations'][] = [
+        'diamantis_import_product_save',
+        [$column, $column_name_key],
+      ];
+
+      if ($key > 100) {
+        break;
+      }
+    }
+  }
+  else {
+    $err_message = 'Nid or Κωδικός is missing from the csv file.';
+  }
+
+  if (!empty($err_message)) {
+    form_set_error('import_file', $err_message);
+  }
+  else {
+    batch_set($batch);
+  }
+
+}
+
+/**
+ * Check that the CSV has the required columns.
+ *
+ * @param array $array
+ *   The array with the columns found.
+ *
+ * @return bool
+ *   Returns TRUE if the CSV seems valid. FALSE otherwise.
+ */
+function column_map_view_check($array) {
+  return
+    in_array(DIP_COLUMN_NID, $array, FALSE) !== FALSE &&
+    in_array(DIP_COLUMN_PRODUCT_SKU, $array, FALSE) !== FALSE &&
+    count($array) > 2;
+}

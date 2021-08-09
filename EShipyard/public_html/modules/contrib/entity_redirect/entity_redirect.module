@@ -1,0 +1,372 @@
+<?php
+
+/**
+ * @file
+ * Manages post edit/create redirection for entities.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Config\Entity\ConfigEntityInterface;
+use Drupal\Core\Render\Element\PathElement;
+use Drupal\Core\Routing\TrustedRedirectResponse;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_form_alter().
+ */
+function entity_redirect_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $entity_type_forms = [
+    'node_type_edit_form',
+    'media_bundle_edit_form',
+    'taxonomy_vocabulary_form',
+    'commerce_product_type_add_form',
+    'commerce_product_type_edit_form',
+  ];
+  $entity_forms = [
+    'node_form',
+    'media_form',
+    'taxonomy_term_form',
+    'commerce_product_form',
+  ];
+  if (in_array($form_id, $entity_type_forms)) {
+    $entity = $form_state->getFormObject()->getEntity();
+    $settings = $entity->getThirdPartySettings('entity_redirect');
+    $form['workflow']['entiry_redirect'] = [
+      '#type' => 'fieldset',
+      '#title' => t('Redirect on Save'),
+      'destination' => [
+        '#type' => 'select',
+        '#title' => t('Redirect Destination'),
+        '#options' => [
+          'default' => t('- Default -'),
+          'add_form' => t('Add Form'),
+          'url' => t('Local Url'),
+          'created' => t('Created %entity_label', ['%entity_label' => $entity->label()]),
+        ],
+        '#default_value' => isset($settings['destination']) ? $settings['destination'] : 'default',
+      ],
+      'url' => [
+        '#type' => 'path',
+        '#title' => t('Local Destination Url'),
+        '#description' => t('Path to redirect the user to after submission of forms for this entity. For example, type "/about" to redirect to that page. Use a relative path with a slash in front.'),
+        '#default_value' => isset($settings['url']) ? $settings['url'] : '',
+        '#convert_path' => PathElement::CONVERT_NONE,
+        '#states' => [
+          'visible' => [
+            '#edit-destination' => [
+              'value' => 'url',
+            ],
+          ],
+        ],
+      ],
+      'external' => [
+        '#type' => 'url',
+        '#title' => t('External Destination Url'),
+        '#description' => t('Enter a fully qualified url such as https://example.com/page.'),
+        '#default_value' => isset($settings['external']) ? $settings['external'] : '',
+        '#access' => \Drupal::currentUser()->hasPermission('set external entity redirects'),
+        '#states' => [
+          'visible' => [
+            '#edit-destination' => [
+              'value' => 'external',
+            ],
+          ],
+        ],
+      ],
+      'personalizable' => [
+        '#type' => 'checkbox',
+        '#title' => t('Allow Per User Settings'),
+        '#default_value' => isset($settings['personalizable']) ? $settings['personalizable'] : TRUE,
+        '#description' => t('Allow individual users to control their own redirect destination. If enabled and the user has permision they can change it on their profile edit pages.'),
+      ],
+      'redirect_edit' => [
+        '#type' => 'checkbox',
+        '#title' => t('Redirect after editing'),
+        '#default_value' => isset($settings['redirect_edit']) ? $settings['redirect_edit'] : FALSE,
+        '#description' => t('By default only redirects on creation of new entities, check to also apply when editing.'),
+      ],
+    ];
+    if (\Drupal::currentUser()->hasPermission('set external entity redirects')) {
+      $form['workflow']['entiry_redirect']['destination']['#options']['external'] = t('External URL');
+    }
+    $form['#entity_builders'][] = 'entity_redirect_bundle_builder';
+  }
+  $info = $form_state->getBuildInfo();
+  if (isset($info['base_form_id']) && in_array($info['base_form_id'], $entity_forms)) {
+    $info = $form_state->getBuildInfo();
+    if ($info['base_form_id'] === 'node_form') {
+      $type = 'node_type';
+    }
+    elseif ($info['base_form_id'] === 'media_form') {
+      // If media_entity is enabled, the entity type we are looking for is
+      // 'media_bundle', if not, it means we are using the core media module
+      // so the entity type is 'media_type'.
+      $type = \Drupal::moduleHandler()->moduleExists('media_entity') ? 'media_bundle' : 'media_type';
+    }
+    elseif ($info['base_form_id'] === 'taxonomy_term_form') {
+      $type = 'taxonomy_vocabulary';
+    }
+    elseif ($info['base_form_id'] === 'commerce_product_form') {
+      $type = 'commerce_product_type';
+    }
+
+    $entity = $form_state->getFormObject()->getEntity();
+    $bundle = $entity->bundle();
+    $entity_type = entity_load($type, $bundle);
+    if (!$entity->isNew() && !$entity_type->getThirdPartySetting('entity_redirect', 'redirect_edit')) {
+      return;
+    }
+    $form['actions']['publish']['#submit'][] = 'entity_redirect_submit';
+    $form['actions']['submit']['#submit'][] = 'entity_redirect_submit';
+  }
+}
+
+/**
+ * Entity form builder for bundle forms to save values to 3rd party settings.
+ */
+function entity_redirect_bundle_builder($entity_type, ConfigEntityInterface $type, &$form, FormStateInterface $form_state) {
+  $type->setThirdPartySetting('entity_redirect', 'destination', $form_state->getValue('destination'));
+  $type->setThirdPartySetting('entity_redirect', 'url', $form_state->getValue('url'));
+  $type->setThirdPartySetting('entity_redirect', 'personalizable', $form_state->getValue('personalizable'));
+  $type->setThirdPartySetting('entity_redirect', 'redirect_edit', $form_state->getValue('redirect_edit'));
+
+  if (\Drupal::currentUser()->hasPermission('set external entity redirects')) {
+    $type->setThirdPartySetting('entity_redirect', 'external', $form_state->getValue('external'));
+  }
+}
+
+/**
+ * Submit function to handle the redirection per entity create/edit action.
+ */
+function entity_redirect_submit($form, FormStateInterface $form_state) {
+  $info = $form_state->getBuildInfo();
+  if ($info['base_form_id'] === 'node_form') {
+    $type = 'node_type';
+    $route = 'node';
+  }
+  elseif ($info['base_form_id'] === 'media_form') {
+    // If media_entity is enabled, the entity type we are looking for is
+    // 'media_bundle', if not, it means we are using the core media module
+    // so the entity type is 'media_type'.
+    $type = \Drupal::moduleHandler()->moduleExists('media_entity') ? 'media_bundle' : 'media_type';
+    $route = 'media';
+  }
+  elseif ($info['base_form_id'] === 'taxonomy_term_form') {
+    $type = 'taxonomy_vocabulary';
+    $route = 'taxonomy_term';
+  }
+  elseif ($info['base_form_id'] === 'commerce_product_form') {
+    $type = 'commerce_product_type';
+    $route = 'commerce_product';
+  }
+
+  $entity = $form_state->getFormObject()->getEntity();
+  $bundle = $entity->bundle();
+  $entity_type = entity_load($type, $bundle);
+  if ($entity_type->getThirdPartySetting('entity_redirect', 'personalizable')) {
+    if ($user_id = \Drupal::currentUser()->id() && \Drupal::currentUser()->hasPermission('use personalized redirect options')) {
+      $personalization = $entity_type->getThirdPartySetting('entity_redirect', 'personalization');
+      if (isset($personalization[$user_id])) {
+        if ($personalization[$user_id]['destination'] !== 'default') {
+          $destination = $personalization[$user_id]['destination'];
+          if (isset($personalization[$user_id]['url'])) {
+            $url = $personalization[$user_id]['url'];
+          }
+          if (isset($personalization[$user_id]['external'])) {
+            $external = $personalization[$user_id]['external'];
+          }
+        }
+      }
+    }
+  }
+  if (isset($destination) || $destination = $entity_type->getThirdPartySetting('entity_redirect', 'destination')) {
+    if ($destination === 'add_form') {
+      $route_provider = \Drupal::service('router.route_provider');
+      $routes = array_keys($route_provider->getRoutesByNames(["${route}.add", "entity.${route}.add_form"]));
+      $form_state->setRedirect($routes[0], [$type => $bundle]);
+    }
+    elseif ($destination === 'created') {
+      $form_state->setRedirect("entity.${route}.canonical", [$route => $entity->id()]);
+    }
+    elseif ($destination === 'url') {
+      if (isset($url) || $url = $entity_type->getThirdPartySetting('entity_redirect', 'url')) {
+        $form_state->setRedirectUrl(Url::fromUri('internal:' . $url));
+      }
+    }
+    elseif ($destination === 'external') {
+      if (isset($external) || $external = $entity_type->getThirdPartySetting('entity_redirect', 'external')) {
+        $response = new TrustedRedirectResponse($external);
+        $form_state->setResponse($response);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Add the personalizable settings to an individual user's account page.
+ *
+ * @see \Drupal\user\ProfileForm::form()
+ */
+function entity_redirect_form_user_form_alter(&$form, FormStateInterface $form_state) {
+  // Ensure user has necessary permission.
+  if (!\Drupal::currentUser()->hasPermission('administer personalized redirect options')) {
+    return;
+  }
+  $user_id = $form_state->getFormObject()->getEntity()->id();
+  if (!isset($form['entity_options'])) {
+    $form['entity_options'] = [
+      '#type' => 'details',
+      '#title' => t('Entity Personalization'),
+      '#tree' => TRUE,
+      '#open' => FALSE,
+      '#weight' => 10,
+    ];
+  }
+
+  // If media_entity is enabled, the entity type we are looking for is
+  // 'media_bundle', if not, it means we are using the core media module
+  // so the entity type is 'media_type'.
+  if (\Drupal::moduleHandler()->moduleExists('media_entity') == TRUE) {
+    $types = [
+      'node_type' => [
+        'title' => t('Content'),
+        'access' => 'node',
+      ],
+      'media_bundle' => [
+        'title' => t('Media'),
+        'access' => 'media',
+      ],
+      'taxonomy_vocabulary' => [
+        'title' => t('Vocabulary'),
+        'access' => 'taxonomy_term',
+      ],
+      'commerce_product_type' => [
+        'title' => t('Commerce Product'),
+        'access' => 'commerce_product',
+      ],
+    ];
+  } else {
+    $types = [
+      'node_type' => [
+        'title' => t('Content'),
+        'access' => 'node',
+      ],
+      'media_type' => [
+        'title' => t('Media'),
+        'access' => 'media',
+        ],
+      'taxonomy_vocabulary' => [
+        'title' => t('Vocabulary'),
+        'access' => 'taxonomy_term',
+      ],
+      'commerce_product_type' => [
+        'title' => t('Commerce Product'),
+        'access' => 'commerce_product',
+      ],
+	];
+  }
+
+  foreach ($types as $type => $type_data) {
+    // Ensure that the entity type exists for this install.
+    if (!\Drupal::entityTypeManager()->hasDefinition($type)) {
+      continue;
+    }
+    if (!isset($form['entity_options'][$type])) {
+      $form['entity_options'][$type] = [
+        '#title' => $type_data['title'],
+        '#type' => 'details',
+        '#open' => TRUE,
+      ];
+    }
+    foreach (\Drupal::entityTypeManager()->getStorage($type)->loadMultiple() as $bundle) {
+      // Filter by entity access permission.
+      if (!\Drupal::entityTypeManager()->getAccessControlHandler($type_data['access'])->createAccess($bundle->id())) {
+        continue;
+      }
+
+      // Filter by entity settings.
+      if (!$bundle->getThirdPartySetting('entiry_redirect', 'personalizable', TRUE)) {
+        continue;
+      }
+      $label = $bundle->label();
+      $id = $bundle->id();
+      $defaults = $bundle->getThirdPartySetting('entity_redirect', "personalization");
+      if (!isset($defaults[$user_id])) {
+        $defaults[$user_id] = [
+          'destination' => 'default',
+        ];
+      }
+      if (!isset($form['entity_options'][$type][$id])) {
+        $form['entity_options'][$type][$id] = [
+          '#title' => $label,
+          '#type' => 'details',
+          '#tree' => TRUE,
+          '#open' => TRUE,
+        ];
+      }
+      $form['entity_options'][$type][$id]['destination'] = [
+        '#type' => 'select',
+        '#title' => t('Redirect destination'),
+        '#options' => [
+          'default' => t('- Default -'),
+          'add_form' => t('Add Form'),
+          'created' => t('Created %entity_label', ['%entity_label' => $label]),
+          'url' => t('Local Url'),
+          'external' => t('External Url'),
+        ],
+        '#default_value' => $defaults[$user_id]['destination'],
+      ];
+      $form['entity_options'][$type][$id]['url'] = [
+        '#type' => 'path',
+        '#title' => t('Local Destination Url'),
+        '#description' => t('Path to redirect the user to after submission of forms for this entity. For example, type "/about" to redirect to that page. Use a relative path with a slash in front.'),
+        '#default_value' => isset($defaults[$user_id]['url']) ? $defaults[$user_id]['url']: '',
+        '#convert_path' => PathElement::CONVERT_NONE,
+        '#states' => [
+          'visible' => [
+            "select[name='entity_options[${type}][${id}][destination]']" => [
+              'value' => 'url',
+            ],
+          ],
+        ],
+      ];
+      $form['entity_options'][$type][$id]['external'] = [
+        '#type' => 'url',
+        '#title' => t('External Destination Url'),
+        '#description' => t('Enter a fully qualified url such as https://example.com/page.'),
+        '#default_value' => isset($defaults[$user_id]['external']) ? $defaults[$user_id]['external'] : '',
+        '#access' => \Drupal::currentUser()->hasPermission('set external entity redirects'),
+        '#states' => [
+          'visible' => [
+            "select[name='entity_options[${type}][${id}][destination]']" => [
+              'value' => 'external',
+            ],
+          ],
+        ],
+      ];
+    }
+  }
+  $form['actions']['submit']['#submit'][] = 'entity_redirect_user_profile_form_submit';
+}
+
+/**
+ * Submit callback for the user profile form to save the settings.
+ */
+function entity_redirect_user_profile_form_submit($form, FormStateInterface $form_state) {
+  $user_id = $form_state->getFormObject()->getEntity()->id();
+  foreach ($form_state->getValue('entity_options') as $type => $bundles) {
+    foreach ($bundles as $bundle => $data) {
+      $bundle = entity_load($type, $bundle);
+      $settings = $bundle->getThirdPartySetting('entity_redirect', 'personalization', []);
+      $settings[$user_id] = [
+        'destination' => $data['destination'],
+        'url' => $data['url'],
+        'external' => $data['external'],
+      ];
+      $bundle->setThirdPartySetting('entity_redirect', "personalization", $settings);
+      $bundle->save();
+    }
+  }
+}

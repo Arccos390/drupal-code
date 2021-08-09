@@ -1,0 +1,22 @@
+entity.yacht_action.settings:
+  title: Settings
+  route_name: entity.yacht_action.settings
+  base_route: entity.yacht_action.settings
+entity.yacht_action.view:
+  title: View
+  route_name: entity.yacht_action.canonical
+  base_route: entity.yacht_action.canonical
+entity.yacht_action.edit_form:
+  title: Edit
+  route_name: entity.yacht_action.edit_form
+  base_route: entity.yacht_action.canonical
+entity.yacht_action.delete_form:
+  title: Delete
+  route_name: entity.yacht_action.delete_form
+  base_route: entity.yacht_action.canonical
+  weight: 10
+entity.yacht_action.collection:
+  title: Yacht action
+  route_name: entity.yacht_action.collection
+  base_route: system.admin_content
+  weight: 10

@@ -1,0 +1,63 @@
+eshipyard_custom_changes.set_next_year:
+  path: '/set_next_year/{uid}/{answer}'
+  defaults:
+    _controller: '\Drupal\eshipyard_custom_changes\Controller\UpdateFromPopUpMessage::set_next_year_field_value'
+    _name: 'Next Year Field Set'
+  requirements:
+    _permission: 'access content'
+
+eshipyard_custom_changes.get_next_year:
+  path: '/get_next_year/{uid}'
+  defaults:
+    _controller: '\Drupal\eshipyard_custom_changes\Controller\UpdateFromPopUpMessage::get_next_year_field_value'
+    _name: 'Next Year Field Get'
+  requirements:
+    _permission: 'access content'
+
+eshipyard_custom_changes.track:
+  path: '/tracker'
+  defaults:
+    _controller: '\Drupal\eshipyard_custom_changes\Controller\Track::tracker'
+    _name: 'Track'
+  requirements:
+    _permission: 'access_tracker'
+
+eshipyard_custom_changes.update_remain_ashore:
+  path: '/update_remain_ashore/{yacht_id}/{answer}'
+  defaults:
+    _controller: '\Drupal\eshipyard_custom_changes\Controller\UpdateYachtFields::set_remain_ashore_field'
+    _name: 'Update Ashore Field'
+  requirements:
+    _permission: 'access content'
+
+eshipyard_custom_changes.cradle_log_history:
+  path: '/get_cradle_log_history/{yacht_id}'
+  defaults:
+    _controller: '\Drupal\eshipyard_custom_changes\Controller\CradleLog::get_cradle_log_history'
+    _name: 'Get Cradle Log History'
+  requirements:
+    _permission: 'access content'
+
+eshipyard_custom_changes.migrate:
+  path: '/next_year_migrate'
+  defaults:
+    _controller: '\Drupal\eshipyard_custom_changes\Controller\Migrate::next_year_migrate'
+    _name: 'Migrate'
+  requirements:
+    _permission: 'access content'
+
+eshipyard_custom_changes.cradle_log_page:
+  path: 'admin/cradle_log_page/{cradle_id}'
+  defaults:
+    _controller: '\Drupal\eshipyard_custom_changes\Controller\CradleLog::cradle_view_history'
+    _name: 'Cradle view history page'
+  requirements:
+    _permission: 'access content'
+
+eshipyard_custom_changes.sync_cradle_yachts:
+  path: 'sync/cradle-yachts'
+  defaults:
+    _controller: '\Drupal\eshipyard_custom_changes\Controller\Sync::sync_empty_cradle_yacht'
+    _name: 'Sync empty cradle to yachts'
+  requirements:
+    _permission: 'access content'

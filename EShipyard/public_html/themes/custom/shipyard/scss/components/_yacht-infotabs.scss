@@ -1,0 +1,79 @@
+.user-action-yacht {
+	display: inline-block;		
+	margin-right: 10px;
+	background: white;
+	border: 1px solid #e87915;
+	padding: 8px 50px;
+	border-radius: 30px;
+	color: #e87915;
+	min-width: 100px;
+	text-align: center;
+	padding: 4px 30px;
+	margin: 27px 5px;
+	margin-bottom: 0;
+
+	&:hover {
+		background: #e87915;
+		border: none;
+		color: white;
+	}
+}
+
+.bsg-yacht-infotabs {
+	
+	.info-content {
+		min-height: 200px;
+		background: $opaque-petrol;
+		box-shadow: 0 2px 4px rgba($black,0.20);
+		margin-top: 20px;
+		padding: 25px;
+		overflow-y: auto;
+	}
+
+	.yacht-tab {
+		&-file {
+			display: block;
+			margin: 0 -25px;
+			padding: 10px 30px;
+			@include links($black,$black,$black,$black);
+			
+			&.file-even {
+				background: $opaque-petrol;
+				
+				&.first {
+					margin-top: -25px;
+				}
+				&.last {
+					margin-bottom: -25px;
+				}
+			}
+			&.file-odd {
+				background: $white;
+
+				&.last {
+					margin-bottom: -25px;
+				}
+			}
+		}
+		&-image {
+			display: inline-block;
+			margin-right: 20px;
+			margin-bottom: 15px;	
+
+			img {
+				border-radius: 5px;
+			}	
+
+			@include breakpoint(450px) {
+				width: 26%;
+			}
+			@include breakpoint(380px) {
+				width: 100%;
+				img {
+					margin: 0 auto;
+				}
+			}
+		}
+		
+	}
+}

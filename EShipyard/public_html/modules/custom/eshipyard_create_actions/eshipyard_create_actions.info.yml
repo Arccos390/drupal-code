@@ -1,0 +1,5 @@
+name: 'eshipyard_create_actions'
+type: module
+description: 'Custom Module to provide an endpoint for Posting Yacht actions'
+core: 8.x
+package: 'Custom'

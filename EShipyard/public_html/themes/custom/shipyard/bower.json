@@ -1,0 +1,10 @@
+{
+  "name": "shipyard",
+  "dependencies": {
+    "selectivizr": "^1.0.2",
+    "html5shiv": "^3.7.3",
+    "respond": "^1.4.2",
+    "pie": "^1.0.0",
+    "matchMedia": "matchmedia#^0.3.0"
+  }
+}

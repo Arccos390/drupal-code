@@ -1,0 +1,11 @@
+action.configuration.eshipyard_email_invitation_action:
+  type: action_configuration_default
+  label: 'Email Invitation'
+
+eshipyard_email.settings:
+  type: config_object
+  label: 'Notification Message Form'
+  mapping:
+    message:
+      type: string
+      label: 'Notification Message'

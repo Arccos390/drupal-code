@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains eshipyard_create_actions.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function eshipyard_create_actions_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the eshipyard_create_actions module.
+    case 'help.page.eshipyard_create_actions':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Custom Module to provide an endpoint for Posting Yacht actions') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function eshipyard_create_actions_theme() {
+  return [
+    'eshipyard_create_actions' => [
+      'render element' => 'children',
+    ],
+  ];
+}

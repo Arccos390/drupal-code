@@ -1,0 +1,42 @@
+gtweaks.yachts:
+  path: '/yachts'
+  defaults:
+    _controller: 'Drupal\gtweaks\Controller\GtweaksController::emptyContent'
+    _title: 'Yachts'
+  requirements:
+    _permission: 'access content'
+gtweaks.cradles:
+  path: '/cradles'
+  defaults:
+    _controller: 'Drupal\gtweaks\Controller\GtweaksController::emptyContent'
+    _title: 'Cradles'
+  requirements:
+    _permission: 'access content'
+gtweaks.owners:
+  path: '/owners'
+  defaults:
+    _controller: 'Drupal\gtweaks\Controller\GtweaksController::emptyContent'
+    _title: 'Owners'
+  requirements:
+    _permission: 'access content'
+gtweaks.calendar:
+  path: '/calendar'
+  defaults:
+    _controller: 'Drupal\gtweaks\Controller\GtweaksController::emptyContent'
+    _title: 'Calendar'
+  requirements:
+    _permission: 'access content'
+gtweaks.pending:
+  path: '/pending-requests'
+  defaults:
+    _controller: 'Drupal\gtweaks\Controller\GtweaksController::emptyContent'
+    _title: 'Pending Requests'
+  requirements:
+    _permission: 'access content'
+gtweaks.fallback:
+  path: '/no-yacht'
+  defaults:
+    _controller: 'Drupal\gtweaks\Controller\GtweaksController::emptyContent'
+    _title: 'No Yacht'
+  requirements:
+    _permission: 'access content'

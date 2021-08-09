@@ -1,0 +1,86 @@
+.profile {
+	box-shadow: 0 2px 4px rgba($black,0.15);
+	position: relative;
+}
+
+.user-info-header {
+	background: $light-grey-2;
+	text-align: center;
+	padding: 50px 10px 30px 10px;
+
+	&-fullname {
+		font-size: 0;
+
+		.field {
+			font-size: $l-medium;
+			width: auto;
+			display: inline-block;
+
+			&:first-child {
+				margin-right: 5px;
+			}
+		}
+	}
+	
+	h3 {
+		font-family: $alegreya;
+		color: $petrol;
+
+		&:after {
+			content: "";
+			width: 50px;
+			height: 2px;
+			display: block;
+			background: $petrol;
+			margin: 0 auto;
+		}
+	}
+
+	img {
+		border-radius: 50%;
+		margin: 0 auto;
+		margin-top: 25px;
+		margin-bottom: 15px;
+	}
+}
+
+.user-info-contact {
+	padding: 35px 0 60px 25px;
+	h4 {
+		color: $grey-2;
+		font-weight: 400;
+		margin-bottom: 15px;
+	}
+
+	.field--name-field-user-email {
+		margin-bottom: 15px;
+
+		&:before {
+			content: "";
+			display: inline-block;
+			vertical-align: top;
+			background: url(../images/custom-icons/email.svg);
+			width: 28px;
+			height: 20px;
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position-x: 50%;
+			margin-right: 30px;			
+		}
+	}
+	.field--name-field-user-telephone {
+		margin-bottom: 15px;
+		&:before {
+			content: "";
+			display: inline-block;
+			vertical-align: top;
+			background: url(../images/custom-icons/mobile.svg);
+			width: 28px;
+			height: 30px;
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position-x: 50%;
+			margin-right: 30px;
+		}
+	}
+}

@@ -1,0 +1,121 @@
+
+.main-content-wrapper {
+	width: calc(100% - 165px);
+	float: right;
+	height: 100%;
+	@include clearfix;
+
+	@include breakpoint(960px) {
+		width: 100%;
+	}
+}
+
+main {
+	float: left;
+	//width: calc(100% - 420px);
+	width: percentage(1320 / 1740);
+	padding: 90px 45px;
+	@include breakpoint(960px) {
+		padding: 70px 15px;
+	}
+}
+
+
+.bsg-yacht-infotabs {
+	margin-top: 90px;
+	min-height: 200px;
+	width: 100%;
+	clear: both;
+	padding-top: 90px;
+}
+
+.datalist-right-sidebar,
+.right-sidebar {
+	float: right;
+	padding-top: 90px;
+	//max-width: 420px;
+	//width: 100%;
+	//width: percentage(420 / 1740);
+	width: 420px;
+	height: 100%;
+	@include breakpoint(1600px) {
+		width: 350px;
+	}
+}
+
+.page-node-type-yacht {
+
+	#general-container {
+
+		@include breakpoint(1500px) {
+			display: table !important;
+		    width: 100%;
+		    padding: 60px;
+
+		    main {
+	    	    float: none;
+    			display: table-footer-group;
+		    	width: 100%;
+		    }
+		}
+
+		@include breakpoint(1220px) {
+			padding: 30px;
+		}
+		@include breakpoint(570px) {
+			padding: 20px;
+		}
+	}
+
+	.right-sidebar {
+		width: percentage(420 / 1740);
+		
+		@include breakpoint(1500px) {
+			display: table-header-group;
+			width: 100%;
+			padding-top: 40px;
+
+			.user-info-header {
+				float: left;
+			    padding: 20px 70px;
+			    margin-right: 30px;
+
+			    img {
+			    	width: 50%;
+			    }
+			}
+		}
+		@include breakpoint(700px) {
+			.user-info-header {
+				padding: 20px;
+			}
+		}
+
+		@include breakpoint(570px) {
+			display: none;
+		}
+
+
+		.profile {
+			@include breakpoint(1500px) {
+			    display: table;
+			    width: 690px;
+			    margin-bottom: 60px;
+				
+				.user-info-contact {
+					padding-bottom: 0;
+				}
+		
+			    .btn {
+			    	position: relative;
+			    	top: auto;
+			    	left: auto;
+			    	transform: none;
+			    }
+			}
+			@include breakpoint(1140px) {
+				width: 100%;
+			}
+		}
+	}
+}

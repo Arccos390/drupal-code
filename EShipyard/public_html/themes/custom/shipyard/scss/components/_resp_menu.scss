@@ -1,0 +1,108 @@
+.sidebar-menu{
+  clear: both;
+  //transition: left .2s ease-in;
+  .menu-item {
+    @include clearfix;
+  }
+
+  &.closed {
+    left: -180px;
+    opacity: 0;
+    transition: left .2s ease-in;
+  }
+  &.open {
+    z-index: 9;
+    left: 0;
+    width: 100%;
+    opacity: 1;
+    background: $light-grey;
+    transition: left .2s ease-out;
+  }
+
+}
+
+
+
+/* sidebar-menuicon */
+
+header .menu-icon {
+  cursor: pointer;
+  // display: inline-block;
+  // float: right;
+  padding: 22px 20px;
+  float: left;
+  position: relative;
+  user-select: none;
+  border-right: 1px solid rgba($white,0.15);
+}
+
+header .menu-icon .navicon {
+  background: $petrol-light;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 18px;
+}
+
+header .menu-icon .navicon:before,
+header .menu-icon .navicon:after {
+  background: $petrol-light;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+.menu-icon .navicon:before {
+  top: 5px;
+}
+
+.menu-icon .navicon:after {
+  top: -5px;
+}
+
+/* sidebar-menubtn */
+
+header .menu-icon {
+  display: none;
+
+  @include breakpoint(960px) {
+    display: block;
+    margin-right: 20px;
+  }
+
+  @include breakpoint(600px) {
+    margin-right: 10px;
+  }
+
+  @include breakpoint(360px) {
+    padding: 22px 15px;
+  }
+}
+
+header .menu-btn {
+  display: none;
+}
+
+// header .menu-btn:checked ~ .sidebar-menu {
+//   max-height: 240px;
+// }
+
+header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}

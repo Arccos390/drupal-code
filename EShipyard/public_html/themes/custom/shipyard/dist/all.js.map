@@ -1,0 +1,1 @@
+{"version":3,"sources":["main.js"],"names":["test","tost","console","log"],"mappings":";;AAAA,IAAIA,OAAO,EAAX;AACA,IAAMC,OAAO,EAAb;;AAEAC,QAAQC,GAAR,CAAY,UAAZ","file":"all.js","sourcesContent":["let test = \"\";\nconst tost = \"\";\n\nconsole.log(\"test app\");"]}

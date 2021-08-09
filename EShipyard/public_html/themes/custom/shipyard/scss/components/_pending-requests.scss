@@ -1,0 +1,22 @@
+.pending-requests {
+	ul {
+		margin: 0 20px;
+		list-style-type: disc;
+	}
+	li {
+	
+		@include links($black,$black,$black,$black);
+		a {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+		padding: 20px 0;
+		border-bottom: 1px solid $grey;
+
+		&:last-child {
+			border-bottom: none;
+		}
+	}
+}

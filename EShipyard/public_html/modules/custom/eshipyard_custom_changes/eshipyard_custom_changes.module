@@ -1,0 +1,313 @@
+<?php
+
+use Drupal\field_collection\Entity\FieldCollectionItem;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+function eshipyard_custom_changes_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+  $current_user = \Drupal::currentUser();
+  $roles = $current_user->getRoles();
+  switch ($form_id) {
+    case 'node_yacht_edit_form':
+      //dump($form);
+      if($roles[0] === 'authenticated' && $roles[1] === 'bsg_client') {
+        $form['title']['#disabled'] = 'disabled';
+        $form['field_area']['#access'] = FALSE;
+        $form['field_yacht_type']['#access'] = FALSE;
+        $form['field_yacht_weight']['#access'] = FALSE;
+        $form['field_yacht_draft']['#access'] = FALSE;
+        $form['field_yacht_loa']['#access'] = FALSE;
+        $form['field_yacht_nationality']['#access'] = FALSE;
+        $form['field_yacht_position']['#access'] = FALSE;
+        $form['field_entity_ref_requests']['#access'] = FALSE;
+        $form['field_entity_ref_cradle']['#access'] = FALSE;
+        $form['field_entity_ref_user']['#access'] = FALSE;
+        $form['field_maintenance']['#access'] = FALSE;
+        $form['field_has_paid']['#access'] = FALSE;
+        $form['field_remain_in_yard']['#access'] = FALSE;
+      }
+      break;
+    case 'user_form':
+      if($roles[0] === 'authenticated' && $roles[1] === 'bsg_client') {
+        $form['account']['mail']['#access']  = FALSE;
+        $form['account']['name']['#access']  = FALSE;
+        $form['account']['status']['#access']  = FALSE;
+        $form['account']['roles']['#access']  = FALSE;
+        $form['account']['notify']['#access']  = FALSE;
+        $form['field_next_year']['#access']  = FALSE;
+        $form['field_submission']['#access']  = FALSE;
+        $form['field_user_track_email']['#access']  = FALSE;
+        $form['field_invitation_sent']['#access']  = FALSE;
+        $form['language']['#access']  = FALSE;
+        $form['contact']['#access']  = FALSE;
+      }
+      break;
+    case 'yacht_action_edit_form':
+      if($roles[0] === 'authenticated' && $roles[1] === 'bsg_client') {
+        $form['type']['#access'] = FALSE;
+        $form['approved_date']['#access'] = FALSE;
+        $form['status']['#access'] = FALSE;
+        $form['created']['#access'] = FALSE;
+        $form['yacht_id']['#access'] = FALSE;
+        $form['cradle_id']['#access'] = FALSE;
+        if($form_state->getBuildInfo()['callback_object']->getEntity()->get('type')->value === 'hauling'){
+          $form['arrival_date']['#access'] = FALSE;
+        }
+      }
+      if($roles[1] === 'bsg_admin'){
+        $form['cradle_id']['#access'] = FALSE;
+      }
+      break;
+  }
+}
+
+
+/**
+ * Implements hook_entity_build_defaults_alter().
+ */
+function eshipyard_custom_changes_user_build_defaults_alter(array &$build, \Drupal\Core\Entity\EntityInterface $entity, $view_mode){
+  \Drupal::service('page_cache_kill_switch')->trigger();
+  if (\Drupal::request()->attributes->get('user') && \Drupal::currentUser()->isAuthenticated() && !strpos(\Drupal::service('path.current')->getPath(), '/edit')) {
+    if (\Drupal::currentUser()->getRoles()[1] === 'bsg_admin' || \Drupal::currentUser()->getRoles()[1] === 'administrator' || \Drupal::currentUser()->getRoles()[1] === 'bsg_operator' || \Drupal::currentUser()->getRoles()[1] === 'external_user') {
+      $response = new RedirectResponse('/calendar');
+      $response->send();
+      return;
+    }
+    $uid = \Drupal::currentUser()->id();
+    $nids = \Drupal::entityQuery('node')
+      ->condition('type', 'yacht')
+      ->condition('field_entity_ref_user', $uid)
+      ->sort('created', 'DESC')
+      ->range(0, 1)
+      ->execute();
+    $nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
+    if (!empty($nodes)) {
+      $nid_of_yacht = array_values($nodes)[0]->get('nid')->value;
+      $response = new RedirectResponse("/node/{$nid_of_yacht}");
+      $response->send();
+      return;
+    }
+    else {
+      $response = new RedirectResponse('/no-yacht');
+      $response->send();
+      return;
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function eshipyard_custom_changes_node_presave(Drupal\Core\Entity\EntityInterface $entity) {
+  if($entity->get('type')->target_id === 'cradle'){
+    if(!isset($entity->get('field_area')->value)){
+      $entity->get('field_area')->value = 0;
+    }
+    if(!isset($entity->get('field_cradle_plus')->value)){
+      $entity->get('field_cradle_plus')->value = 0;
+    }
+    if(!isset($entity->get('field_cradle_type')->value)){
+      $entity->get('field_cradle_type')->value = 0;
+    }
+    if(!isset($entity->get('field_cradle_status')->value)){
+      $entity->get('field_cradle_status')->value = 0;
+    }
+  }
+  if($entity->get('type')->target_id === 'yacht'){
+    if(!isset($entity->get('field_yacht_type')->value)){
+      $entity->get('field_yacht_type')->value = 0;
+    }
+    if(!isset($entity->get('field_area')->value)){
+      $entity->get('field_area')->value = 0;
+    }
+    if(!isset($entity->get('field_yacht_position')->value)){
+      $entity->get('field_yacht_position')->value = 0;
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function eshipyard_custom_changes_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
+
+  if($entity->getEntityTypeId() === 'yacht_action') {
+    $current_user = \Drupal::currentUser();
+    $roles = $current_user->getRoles();
+    if ($roles[0] === 'authenticated' && $roles[1] === 'bsg_client') {
+      if(!empty($entity->original)) {
+         if ($entity->get('suggested_date')->value !== $entity->original->get('suggested_date')->value) {
+           $entity->get('status')->value = 'pending';
+         }
+      }
+    }else{
+      if($entity->get('status')->value === 'approved'){
+        $entity->get('approved_date')->value = $entity->get('suggested_date')->value;
+      }
+    }
+    if(!empty($entity->original)) {
+      if ($entity->original->get('status')->value !== 'approved' &&
+        $entity->original->get('status')->value !== $entity->get('status')->value &&
+        $entity->get('status')->value === 'approved')
+      {
+        $entity->get('approved_date')->value = $entity->get('suggested_date')->value;
+      }
+      if ($entity->original->get('status')->value !== 'completed' &&
+        $entity->original->get('status')->value !== $entity->get('status')->value &&
+        $entity->get('status')->value === 'completed')
+      {
+        $yacht_node = \Drupal\node\Entity\Node::load($entity->get('yacht_id')->target_id);
+        if(!empty($yacht_node)){
+          $entity->get('cradle_id')->target_id = $yacht_node->get('field_entity_ref_cradle')->target_id;
+        }else{
+          $entity->get('cradle_id')->target_id = null;
+        }
+      }
+    }
+    if($entity->get('status')->value === 'pending' && $entity->get('type')->value === 'hauling' ){
+      $yacht_node = \Drupal\node\Entity\Node::load($entity->get('yacht_id')->target_id);
+      $yacht_node->get('field_has_paid')->value = 0;
+      $yacht_node->save();
+    }
+  }
+}
+
+/**
+ * Implements hook_user_insert().
+ */
+function eshipyard_custom_changes_user_insert(Drupal\Core\Entity\EntityInterface $entity){
+  $entity->get('name')->value = $entity->get('mail')->value;
+  $entity->save();
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function eshipyard_custom_changes_entity_update(Drupal\Core\Entity\EntityInterface $entity){
+  if($entity->getEntityTypeId() === 'yacht_action') {
+    $current_user = \Drupal::currentUser();
+    $roles = $current_user->getRoles();
+
+    if(!empty($entity->original)) {
+      if ($roles[1] === 'bsg_admin' || $roles[1] === 'administrator' || $roles[1] === 'bsg_operator' || $roles[1] === 'external_user') {
+        if ($entity->get('type')->value === 'launching' && $entity->get('status')->value === 'completed' && $entity->original->get('status')->value !== 'completed') {
+          if (!empty($entity->get('yacht_id')->target_id)) {
+            $yacht_node = \Drupal\node\Entity\Node::load($entity->get('yacht_id')->target_id);
+            $yacht_node->get('field_yacht_position')->value = 1; //On Sail
+            unset($yacht_node->get('field_area')->value);
+            if (!empty($yacht_node->get('field_entity_ref_cradle')->target_id)) {
+              $cradle_node = \Drupal\node\Entity\Node::load($yacht_node->get('field_entity_ref_cradle')->target_id);
+              if (isset($cradle_node)) {
+                unset($cradle_node->get('field_cradle_yacht')->target_id);
+                $cradle_node->get('field_area')->value = 0; //Area: '-'
+                $cradle_node->get('field_cradle_status')->value = 1; //'Available'
+                $cradle_node->save();
+              }
+              unset($yacht_node->get('field_entity_ref_cradle')->target_id);
+            }
+            $yacht_node->save();
+          }
+        }
+        elseif ($entity->get('type')->value === 'hauling' && $entity->get('status')->value === 'completed' && $entity->original->get('status')->value !== 'completed') {
+          if (!empty($entity->get('yacht_id')->target_id)) {
+            $yacht_node = \Drupal\node\Entity\Node::load($entity->get('yacht_id')->target_id);
+            $yacht_node->get('field_yacht_position')->value = 0; //Shipyard
+            $yacht_node->save();
+            $cradle_node = \Drupal\node\Entity\Node::load($yacht_node->get('field_entity_ref_cradle')->target_id);
+            if (isset($cradle_node)) {
+              $cradle_node->get('field_area')->value = $yacht_node->get('field_area')->value; //Area
+              $cradle_node->get('field_cradle_yacht')->target_id = $yacht_node->get('nid')->value; //Link yacht id in cradle
+              $cradle_node->get('field_cradle_status')->value = 0; //'In use'
+              $cradle_node->save();
+            }
+          }
+        }
+      }
+    }
+
+    $current_user = \Drupal::currentUser();
+    $roles = $current_user->getRoles();
+    if($roles[0] === 'authenticated' && $roles[1] === 'bsg_client') {
+      $uid = $current_user->id();
+      $account = \Drupal\user\Entity\User::load($uid);
+      $account->set('field_submission', 1);
+      $account->save();
+    }
+    if ($entity->original->get('status')->value !== 'approved' &&
+      $entity->original->get('status')->value !== $entity->get('status')->value &&
+      $entity->get('status')->value === 'approved')
+    {
+      $nid = $entity->get('yacht_id')->target_id;
+      $node = \Drupal\node\Entity\Node::load($nid);
+      if (!empty($node)) {
+        $yacht_name = $node->getTitle();
+        $user_id = $node->get('field_entity_ref_user')->target_id;
+        $account = \Drupal\user\Entity\User::load($user_id);
+        $mailManager = \Drupal::service('plugin.manager.mail');
+        $to = $account->get('mail')->value;
+        $module = 'eshipyard_email';
+        $key = 'email_notification_approved';
+        $params['message'] = "<div class='mail-wrapper' style='padding-top:50px'>
+                                <h3>Your request for {$yacht_name} yacht, has been approved.</h3>
+                                <div class='mail-footer'>           
+                                    <span><b>Tel:</b> +30 27540 61409</span><span><b>Fax:</b> +30 27540 61023</span><span><b>E-mail:</b> info@bsg.com.gr</span>
+                                    <div class='address'>GR-213 00, Kilada Ermionidas, Argolida, Greece</div>            
+                                </div>
+                             </div>";
+        $result = $mailManager->mail($module, $key, $to, NULL, $params, NULL, $send = TRUE);
+        if ($result['result'] !== TRUE) {
+          \Drupal::logger('ticketapp_upload')
+            ->error("There was a problem sending your email to {$to} and it was not sent.");
+        }
+        else {
+          \Drupal::logger('ticketapp_upload')
+            ->info("Your email to {$to} has been sent.");
+        }
+      }
+    }
+    $current_user = \Drupal::currentUser();
+    $roles = $current_user->getRoles();
+    if($roles[1] === 'bsg_admin' || $roles[1] === 'administrator' || $roles[1] === 'bsg_operator' || $roles[1] === 'external_user'){
+      $response = new RedirectResponse('/calendar');
+      $response->send();
+      return;
+    }
+    $uid = \Drupal::currentUser()->id();
+    $nids = \Drupal::entityQuery('node')
+      ->condition('type', 'yacht')
+      ->condition('field_entity_ref_user', $uid)
+      ->sort('created', 'DESC')
+      ->range(0, 1)
+      ->execute();
+    $nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
+    if (!empty($nodes)) {
+      $nid_of_yacht = array_values($nodes)[0]->get('nid')->value;
+      $response = new RedirectResponse("/node/{$nid_of_yacht}");
+      $response->send();
+      return;
+    }
+    else {
+      $response = new RedirectResponse('/no-yacht');
+      $response->send();
+      return;
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_create().
+ */
+function eshipyard_custom_changes_entity_create(Drupal\Core\Entity\EntityInterface $entity) {
+
+  if($entity->getEntityTypeId() === 'yacht_action') {
+    $current_user = \Drupal::currentUser();
+    $roles = $current_user->getRoles();
+    if($roles[0] === 'authenticated' && $roles[1] === 'bsg_client') {
+      $uid = $current_user->id();
+      $account = \Drupal\user\Entity\User::load($uid);
+      $account->set('field_submission', 1);
+      $account->save();
+    }
+  }
+
+}

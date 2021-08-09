@@ -1,0 +1,229 @@
+#bsg-datalist {
+	.datalist-calendar {
+		box-shadow: none;
+		h2 {
+			max-width: 100%;
+			font-family: $ubuntu;
+			border: none;
+		}
+
+		//todo 1600 px responsive filters.
+		@include breakpoint(1600px) {
+			// & ~ .datalist-right-sidebar {
+			// 	margin-right: -45px;
+			// }
+			width: 100%;
+		}
+	}
+}
+
+.is_week {
+	overflow-x: scroll !important;
+	#calendar {
+		width: 800px;
+	}
+}
+
+.calendar-btn {
+	border: none;
+	background: $petrol-light;
+	color: $white;
+	padding: 6px 20px;
+	&:hover {
+		cursor: pointer;
+		box-shadow: 0 2px 4px rgba($black,0.15);
+	}
+	&.active {
+		background: $orange;
+	}
+}
+
+.calendar-actions {
+	margin: 20px 0;
+}
+
+#calendar-send,
+.datalist-calendar {
+	.fc-state-default {
+		background-color: $petrol-light;
+		background-image: none;
+		color: $white;
+		text-shadow: none;
+		border-radius: 0 !important;
+		@include breakpoint(360px) {
+			padding: 0 6px;
+		}
+	}	
+	.fc-state-active {
+		background-color: $petrol;
+		@include breakpoint(360px) {
+			padding: 0 6px;
+		}
+	}
+	.fc-center {
+		@include breakpoint(360px) {
+			margin-top: 30px;
+		}
+	}
+	.fc-event {
+		background-color: transparent;
+		min-height: 40px;
+		border: none;
+		border-bottom: 1px solid #e8e8e8;
+		padding: 10px;
+	}
+
+	.fc-day-grid-event {
+		.fc-content {
+			white-space: unset;
+			overflow: visible;
+		}
+	}
+
+	.edit-action {
+		float: right;
+		line-height: 30px;
+		padding: 0 10px;
+		font-size: $base;
+		@include links($grad-blue,$grad-blue,$grad-blue,$grad-blue);
+	}
+}
+
+.calendar-status {
+	float: right; 
+	line-height: 25px;
+	@include breakpoint(400px) {
+		display: block;
+		width: 100%;
+		margin: 10px 0;
+	}
+}
+
+tr.fc-list-item {
+	&:nth-child(2n) {
+		background: $opaque-petrol;
+	}
+}
+
+.fc-unthemed .fc-list-heading td {
+	background: $white !important;
+	//box-shadow: 0 2px 4px rgba($black,0.1);
+}
+.fc-list-item-time,
+.fc-time {
+	display: none;
+}
+
+// List View
+.fc-list-table {
+	.fc-list-item-title {
+		line-height: 30px;
+	}
+}
+
+.fc-list-item-title {
+	a {
+		display: inline-block;
+		max-width: 250px;
+	}
+}
+
+// Days 
+.fc-basicDay-view {
+	.fc-content-skeleton {
+		tr {
+			&:nth-child(2n) {
+				background: $opaque-petrol;
+			}
+			a {
+				color: $black;
+				&:hover {
+					color: $black;
+				}
+			}
+		}
+		.fc-content {
+			float: left;
+		}
+		.calendar-status {
+			float: right !important;
+			font-size: $base;
+		}
+		.fc-title {
+			display: inline-block;
+			font-size: $base;
+		}
+	}	
+}
+
+
+// Week Day
+.fc-basicWeek-view {
+	.fc-day-grid-event {
+		.fc-title {
+			display: block;
+			color: $black;
+		}
+		&.approved,
+		&.completed,
+		&.pending,
+		&.progress {
+		 	.calendar-status {
+				float: none;
+				&:after {
+					content: none;
+				}
+			}
+		 }
+	}	
+}
+
+
+.pending {
+	position: relative;
+
+	.calendar-status {
+		color: $purple;
+		&:after {
+			content: "";
+			position: relative;
+			@include sprite($sprite-pending);
+			display: inline-block;
+			vertical-align: middle;
+		}	
+	}
+	
+}
+
+
+.completed {
+	position: relative;
+	.calendar-status {
+		color: $green;
+		&:after {
+			content: "";
+			position: relative;
+			@include sprite($sprite-completed);
+			display: inline-block;
+			vertical-align: middle;
+		}	
+	}
+	
+}
+
+
+.progress,
+.approved {
+	position: relative;
+	.calendar-status {
+		color: $yellow;
+		&:after {
+			content: "";
+			position: relative;
+			@include sprite($sprite-in-progress);
+			display: inline-block;
+			vertical-align: middle;
+		}	
+	}
+	
+}

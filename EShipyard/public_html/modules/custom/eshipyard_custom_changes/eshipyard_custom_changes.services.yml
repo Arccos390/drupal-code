@@ -1,0 +1,5 @@
+services:
+  eshipyard_custom_changes_event_subscriber:
+    class: Drupal\eshipyard_custom_changes\EventSubscriber\CradleViewNodeRedirect
+    tags:
+      - {name: event_subscriber}

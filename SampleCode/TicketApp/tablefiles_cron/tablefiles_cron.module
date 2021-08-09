@@ -1,0 +1,97 @@
+<?php
+
+/**
+ * @file
+ * The main module file.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\Entity\Node;
+use Drupal\tablefiles\Controller\TableXlsx;
+
+/**
+ * Implements hook_cronapi().
+ */
+function tablefiles_cron_cron(){
+  generate_excel_files_callback();
+}
+
+function generate_excel_files_callback(){
+  $now = new DateTime();
+  $today = $now->format('d-m-Y');
+
+  $nids = \Drupal::entityQuery('node')
+    ->condition('type', 'files')
+    ->condition('field_file_updated', '0')
+    ->condition('field_files_type', 'logistics')
+    ->execute();
+
+  $obj = new TableXlsx();
+  foreach ($nids as $nid){
+    $node = Node::load($nid);
+    if(isset($node)) {
+      $node_datetime = new DateTime($node->getTitle());
+      if($now->diff($node_datetime)->d < 7){
+        $date = new DateTime($node->getTitle());
+        $obj->generateXLSX($date->format('Y-m-d'), True);
+      }
+    }
+  }
+  $obj->generateXLSX($now->modify('-1 days')->format('Y-m-d'), True);
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function tablefiles_cron_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
+
+  if($entity->getEntityTypeId() === 'ticket'){
+    $timetable_node = Node::load($entity->get('timetable')->target_id);
+    if(isset($timetable_node)) {
+      $departure_time = $timetable_node->get('field_timetable_departure')->value;
+      $departure_time_obj = new \DateTime($departure_time);
+      $nids = \Drupal::entityQuery('node')
+          ->condition('type', 'files')
+          ->condition('field_files_type', 'logistics')
+          ->condition('title', $departure_time_obj->format('d-m-Y'))
+          ->execute();
+      if(!empty($nids)) {
+        $file_node = Node::load(end($nids));
+        if (isset($file_node)) {
+          $file_node->get('field_file_updated')->value = 0;
+          $file_node->save();
+//          Drupal::logger('update_old_ticket')->info("Update ticket on {$file_node->getTitle()}");
+        }
+      }
+    }
+  }
+
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function tablefiles_cron_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
+
+  if($entity->getEntityTypeId() === 'ticket'){
+    $timetable_node = Node::load($entity->get('timetable')->target_id);
+    if(isset($timetable_node)) {
+      $departure_time = $timetable_node->get('field_timetable_departure')->value;
+      $departure_time_obj = new \DateTime($departure_time);
+      $nids = \Drupal::entityQuery('node')
+        ->condition('type', 'files')
+        ->condition('field_files_type', 'logistics')
+        ->condition('title', $departure_time_obj->format('d-m-Y'))
+        ->execute();
+      if(!empty($nids)){
+        $file_node = Node::load(end($nids));
+        if(isset($file_node)){
+          $file_node->get('field_file_updated')->value = 0;
+          $file_node->save();
+//          Drupal::logger('update_old_ticket')->info("Creating ticket on {$file_node->getTitle()}");
+        }
+      }
+    }
+  }
+
+}

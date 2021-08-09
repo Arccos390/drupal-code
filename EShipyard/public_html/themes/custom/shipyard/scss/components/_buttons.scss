@@ -1,0 +1,67 @@
+
+.btn {
+	background: $orange;
+	padding: 8px 50px;
+	border-radius: 30px;
+	color: $white;
+	position: absolute;
+	bottom: -20px;
+	left: 50%;
+	transform: translateX(-50%);
+	min-width: 200px;
+	text-align: center;
+
+	&:hover {
+		box-shadow: 0 2px 4px rgba($black,0.15);
+	}
+
+
+	&.requests {
+		padding: 8px 40px;
+	}
+}
+
+#view-requests {
+	background: $orange;
+	padding: 8px 40px;
+	border-radius: 30px;
+	color: $white;
+	position: absolute;
+	bottom: -20px;
+	left: 50%;
+	transform: translateX(-50%);
+
+	&:hover {
+		box-shadow: 0 2px 4px rgba($black,0.15);
+	}
+}
+
+.tab {
+	background: $opaque-petrol;
+	color: $black;
+	display: inline-block;
+	padding: 8px 60px;
+	margin-right: 10px;
+	border-radius: 25px;
+	
+	&.active {
+		background: linear-gradient(to right, $blue 20%, $grad-blue 80%);
+		color: $white;
+	}
+
+	&:hover {
+		cursor: pointer;
+		background: linear-gradient(to right, $blue 20%, $grad-blue 80%);
+		box-shadow: 0 2px 4px rgba($black,0.15);
+		color: $white;
+	}
+
+	@include breakpoint(620px) {
+		padding: 8px 40px;
+	}
+	@include breakpoint(480px) {
+		display: block;
+		text-align: center;
+		margin-bottom: 10px;
+	}
+}

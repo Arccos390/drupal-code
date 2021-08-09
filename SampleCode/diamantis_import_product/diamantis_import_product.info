@@ -1,0 +1,3 @@
+name = DiamantisTools - Import Product
+description = Allows the client to update multiple product by importing a csv file
+core = 7.x

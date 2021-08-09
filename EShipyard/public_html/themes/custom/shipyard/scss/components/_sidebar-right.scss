@@ -1,0 +1,136 @@
+
+.responsivefilters {
+	position: fixed !important;
+	bottom: -76px;
+	width: 350px;
+	transition: all 0.55s;
+	margin-bottom: 0 !important;
+	width: 200px;
+	z-index: 2;
+
+	h3 {
+		font-size: 18px;
+		position: relative;
+		&:before {
+			content: "";
+			position: absolute;
+		    right: -15px;
+    		top: 0px;
+			transform: translateY(-50%);
+			//@include sprite($sprite-open-small);
+			background: url(../images/custom-icons/plus-circle.svg);
+			background-repeat: no-repeat;
+			background-size: contain;
+			width: 20px;
+			height: 25px;
+		}
+	}
+
+	&.open {
+		bottom: 0;
+		top: 127px;
+		margin-bottom: 0 !important;
+		box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+		width: 350px;
+		overflow-y: scroll;
+		z-index: 99;
+
+		h3 {
+			font-size: $xxsm-medium;
+			position: relative;
+			&:before {
+				content: "";
+				position: absolute;
+				right: 0;
+				top: 20px;
+				transform: translateY(-50%);
+				// @include sprite($sprite-minus-close-small);
+				background: url(../images/custom-icons/minus-circle.svg);
+				background-repeat: no-repeat;
+				background-size: contain;
+				width: 20px;
+				height: 25px;
+			}
+		}
+
+		&:hover {
+			bottom: 0;
+			cursor: pointer;
+		}
+
+		.filters-wrapper {
+			display: block;
+		}
+		@include breakpoint(450px){
+			width: 100%;
+		}
+	}
+	&:hover {
+		bottom: -50px;
+		cursor: pointer;
+	}
+
+
+	.filters-wrapper {
+		display: none;
+	}
+
+	@include breakpoint(700px) {
+		width: 50%;
+	}
+	
+	
+	#view-requests {
+		display: block;
+		text-align: center;
+		transform: none;
+		left: auto;
+		top: auto;
+		position: relative;
+	}
+	
+
+}
+
+.filters {
+	&.responsivefilters {
+		right: 0;
+	}
+}
+
+.requests {
+	&.responsivefilters {
+		right: 200px;
+		bottom: -42px;
+
+		&.open {
+			overflow-y: scroll;
+			bottom: 0;
+			top: 127px;
+			margin-bottom: 0 !important;
+			width: 350px;
+			z-index: 99;
+
+			&:hover {
+				bottom: 0;
+				cursor: pointer;
+			}
+
+			.filters-wrapper {
+				display: block;
+			}
+			@include breakpoint(450px){
+				width: 100%;
+			}
+		}
+
+		&:hover {
+			bottom: -30px;
+			cursor: pointer;
+		}
+
+		@include breakpoint(700px) {
+			left: 0;
+		}
+	}
+}

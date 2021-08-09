@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function gtweaks_form_user_login_form_alter(&$form, $form_state) {
+  //$form['#submit'][] = 'gtweaks_user_login_submit';
+  $form['pass']['#description'] = 'Enter your password. Your e-mail address is also your password if you haven'. "'". 't changed it.';
+
+  $form['actions']['#weight'] = 5;
+
+  $form['request_password'] = array(
+    '#prefix' => '<div class="request-password-link">',
+    '#markup' => '<span class="reset-text">Did you forget your password?</span><a href="/user/password">Reset it here.</a>',
+    '#suffix' => '</div>',
+    '#weight' => 10
+  );
+}

@@ -1,0 +1,26 @@
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+
+/* links mixin set the display rules of all a tags in a block */
+@mixin links ($link, $visit, $hover, $active) {
+	a {
+	  transition: 0.5s;
+	  color: $link;
+	  &:visited {
+	    color: $visit;
+	  }
+	  &:hover {
+	    color: $hover;   
+	    cursor: pointer;
+	  }
+	  &:active {
+	    color: $active;
+	  }  
+	}
+}

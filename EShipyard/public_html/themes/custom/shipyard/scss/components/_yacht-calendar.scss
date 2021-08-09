@@ -1,0 +1,51 @@
+#calendar-send {
+	#close {
+		background: $red;
+	}
+	.fc-state-default {
+		line-height: 0;
+	}
+
+	.date-type {
+		line-height: 38px;
+		font-size: 18px;
+		span {
+			text-decoration: underline;
+			text-transform: capitalize;
+		}
+	}
+
+	.high-dens {
+		background: $red;
+	}
+
+	label {
+		font-weight: 500;
+	}
+
+	
+}
+
+.help-text {
+	display: block;
+    font-size: $s-base;
+    margin: 15px 0;
+    //border-bottom: 1px solid rgba(0,0,0,0.15);
+    padding-bottom: 10px;
+}
+
+.request-submit-btn {
+	background: $submit-green;
+	padding: 8px 60px;
+	border-radius: 30px;
+	border: none;
+	color: $white;
+	display: block;
+    margin: 0 auto;
+    margin-top: 30px;
+	text-align: center;
+
+	&:hover {
+		box-shadow: 0 2px 4px rgba($black,0.15);
+	}
+}

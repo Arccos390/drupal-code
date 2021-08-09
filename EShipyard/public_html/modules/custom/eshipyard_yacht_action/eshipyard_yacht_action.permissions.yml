@@ -1,0 +1,17 @@
+administer yacht action types:
+  title: 'Administer yacht action types'
+  description: 'Maintain the types of yacht action entity.'
+  restrict access: true
+administer yacht action:
+  title: Administer yacht action settings
+  restrict access: true
+access yacht action overview:
+  title: 'Access yacht action overview page'
+delete yacht action:
+  title: Delete yacht action
+create yacht action:
+  title: Create yacht action
+view yacht action:
+  title: View yacht action
+edit yacht action:
+  title: Edit yacht action

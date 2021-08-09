@@ -1,0 +1,39 @@
+{
+  "name": "shipyard",
+  "version": "1.0.0",
+  "description": "Main JSON file",
+  "main": "gulpfile.js",
+  "scripts": {
+    "sass:dev": "./node_modules/.bin/gulp",
+    "sass:prod": "./node_modules/.bin/gulp sass:prod"
+  },
+  "dependencies": {
+    "highcharts": "^6.2.0",
+    "requirejs": "^2.3.6"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "breakpoint-sass": "^2.7.1",
+    "browser-sync": "^2.24.4",
+    "chroma-sass": "^1.2.6",
+    "gm": "^1.23.1",
+    "gmsmith": "^1.2.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.1.0",
+    "gulp-babel": "^7.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-pixrem": "^1.0.0",
+    "gulp-plumber": "^1.2.0",
+    "gulp-rename": "^1.3.0",
+    "gulp-sass": "^3.2.1",
+    "gulp-sass-glob": "^1.0.9",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.0",
+    "gulp.spritesmith": "^6.9.0",
+    "node-sass-import-once": "^1.2.0",
+    "susy": "^3.0.5",
+    "jquery-colorbox": "^1.6.4"
+  }
+}

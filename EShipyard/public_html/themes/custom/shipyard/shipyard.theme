@@ -1,0 +1,106 @@
+<?php
+
+function shipyard_preprocess_page(&$variables) {
+  $link = "http://e-sepia.com";
+  $variables['current_date'] = "Copyright ©" . date("Y") . " e-shipyard, All rights reserved. Designed & Developed by E-Sepia";
+
+  $site_config = \Drupal::config('system.site');
+  // logo needs to be placed within specified folder
+  $variables['logo'] = file_url_transform_relative(file_create_url(theme_get_setting('logo.url')));
+}
+
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function shipyard_preprocess_html(&$variables) {
+  $account = \Drupal::currentUser();
+  $roles = $account->getRoles();
+  foreach ($roles as $role) {
+    $variables['attributes']['class'][] = 'role-' . $role;
+  }
+}
+
+/**
+ * Implements hook_preprocess_menu().
+ */
+function shipyard_preprocess_menu(array &$variables) {
+  
+  if ($variables['menu_name'] == 'main-menu') {
+    //$last = count($variables['items']);
+
+    foreach ($variables['items'] as $key => $item) {
+
+      $attribute = &$variables['items'][$key]['attributes'];
+      $options = $variables['items'][$key]['url']->getOptions();
+//dump($options['attributes']['id']);
+      if ($options['attributes']['id'] == 'm-yachts') {
+        $variables['items'][$key]['vue_attr'] = 'yachts';
+      }
+      else {
+        if ($options['attributes']['id'] == 'm-cradle') {
+          $variables['items'][$key]['vue_attr'] = 'cradles';
+        }
+        else {
+          if ($options['attributes']['id'] == 'm-owners') {
+            $variables['items'][$key]['vue_attr'] = 'owners';
+          }
+          else {
+            if ($options['attributes']['id'] == 'm-home') {
+              $variables['items'][$key]['vue_attr'] = 'calendar';
+            }
+            else {
+              if ($options['attributes']['id'] == 'm-areas') {
+                $variables['items'][$key]['vue_attr'] = 'areas';
+              }
+            }
+          }
+        }
+      }
+
+      $variables['items'][$key]['is_admin'] = FALSE;
+      $variables['items'][$key]['is_auth'] = FALSE;
+      if (\Drupal::currentUser()->getRoles() && isset(\Drupal::currentUser()->getRoles()[1]) && (\Drupal::currentUser()->getRoles()[1] === 'bsg_admin' || \Drupal::currentUser()->getRoles()[1] === 'administrator' || \Drupal::currentUser()->getRoles()[1] === 'bsg_operator' || \Drupal::currentUser()->getRoles()[1] === 'external_user')) {
+        $variables['items'][$key]['is_admin'] = TRUE;
+      }
+      else {
+        if (\Drupal::currentUser()->isAuthenticated() && \Drupal::currentUser()->getRoles()[1] === 'bsg_client') {
+          $variables['items'][$key]['is_auth'] = TRUE;
+        }
+      }
+
+      $variables['items'][$key]['nid_of_yacht'] = NULL;
+      if (\Drupal::currentUser()->isAuthenticated()) {
+        $uid = \Drupal::currentUser()->id();
+        $nids = \Drupal::entityQuery('node')
+          ->condition('type', 'yacht')
+          ->condition('field_entity_ref_user', $uid)
+          ->sort('created', 'DESC')
+          ->range(0, 1)
+          ->execute();
+        $nodes = \Drupal\node\Entity\Node::loadMultiple($nids);
+        if (!empty($nodes)) {
+          $nid_of_yacht = array_values($nodes)[0]->get('nid')->value;
+//          dpm($nid_of_yacht);
+          $variables['items'][$key]['nid_of_yacht'] = $nid_of_yacht;
+        }
+      }
+
+      //kint($variables['items'][$key]);
+      // $options['attributes']['id'];
+
+
+      // if ($i == 1) {
+      // 	$attribute->addClass('first');
+      // } elseif ($i == $last) {
+      // 	$attribute->addClass('last');
+      // }
+
+      // if (empty($variables['items'][$key]['below'])) {
+      // 	$attribute->addClass('leaf');
+      // }
+
+      // $i++;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+id: eshipyard_email_invitation_action
+label: 'Email Invitation'
+status: true
+langcode: en
+type: user
+plugin: eshipyard_email_invitation_action
+dependencies:
+  module:
+    - user
